@@ -74,5 +74,5 @@ dependencies {
 <br>
 
 <a name="license"></a>
-[开源条款](#): WTFPL
+[开源条款](https://github.com/HyDevelop/HyCommonUtils/blob/master/LICENSE): MIT License
 --------
