@@ -72,3 +72,7 @@ dependencies {
 #### [其他导入(SBT / Leiningen)](https://jitpack.io/#hydevelop/HyCommonUtils/1.0.0.1)
 
 <br>
+
+<a name="license"></a>
+[开源条款](#): WTFPL
+--------
