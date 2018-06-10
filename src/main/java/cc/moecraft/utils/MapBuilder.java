@@ -14,42 +14,22 @@ import java.util.HashMap;
 public class MapBuilder
 {
     /**
-     * 把KV对换成Map
+     * 把KV对构建成Map
      * @param classOne 第一个类的类型
      * @param classTwo 第二个类的类型
-     * @param map KV对
-     * @return Map
+     * @param <T1> 第一个类的类型
+     * @param <T2> 第二个类的类型
+     * @param kv KV对
+     * @return 构建好的Map
      */
-    public static <T1, T2> HashMap<T1, T2> build(Class<T1> classOne, Class<T2> classTwo, Object... map)
+    public static <T1, T2> HashMap<T1, T2> build(Class<T1> classOne, Class<T2> classTwo, Object... kv)
     {
         HashMap<T1, T2> result = new HashMap<>();
 
-        for (int i = 0; i < map.length; i += 2)
+        for (int i = 0; i < kv.length; i += 2)
         {
-            T1 key = (T1) map[i];
-            T2 value = (T2) map[i + 1];
-
-            result.put(key, value);
-        }
-
-        return result;
-    }
-
-    /**
-     * 把KV对换成Map
-     * @param classOne 第一个类的类型
-     * @param classTwo 第二个类的类型
-     * @param map KV对
-     * @return Map
-     */
-    public static <T1, T2> HashMap<T1, T2> build(Object... map)
-    {
-        HashMap<T1, T2> result = new HashMap<>();
-
-        for (int i = 0; i < map.length; i += 2)
-        {
-            T1 key = (T1) map[i];
-            T2 value = (T2) map[i + 1];
+            T1 key = (T1) kv[i];
+            T2 value = (T2) kv[i + 1];
 
             result.put(key, value);
         }
