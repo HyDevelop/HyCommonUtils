@@ -38,7 +38,7 @@ Maven 导入:
 <dependency>
     <groupId>com.github.hydevelop</groupId>
     <artifactId>HyCommonUtils</artifactId>
-    <version>1.1.0.2</version>
+    <version>1.1.0.3</version>
 </dependency>
 ```
 
@@ -65,11 +65,11 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.hydevelop:HyCommonUtils:1.1.0.2'
+    implementation 'com.github.hydevelop:HyCommonUtils:1.1.0.3'
 }
 ```
 
-#### [其他导入(SBT / Leiningen)](https://jitpack.io/#hydevelop/HyCommonUtils/1.1.0.2)
+#### [其他导入(SBT / Leiningen)](https://jitpack.io/#hydevelop/HyCommonUtils/1.1.0.3)
 
 <br>
 
