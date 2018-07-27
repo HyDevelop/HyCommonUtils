@@ -101,4 +101,20 @@ public class ReflectUtils
         }
         return null;
     }
+
+    /**
+     * 输出对象所有值
+     * @param object 对象
+     */
+    public static void printAllValue(Object object) throws IllegalAccessException
+    {
+        System.out.println("正在输出此对象所有值...");
+
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            System.out.println(String.format("- %s = %s", field.getName(), getValue(field, object)));
+        }
+
+        System.out.println("输出完成!");
+    }
 }
