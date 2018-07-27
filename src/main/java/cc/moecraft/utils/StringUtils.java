@@ -24,4 +24,42 @@ public class StringUtils
         }
         return builder.append(key).append("=").append(value);
     }
+
+    /**
+     * 判断当前版本和最新版本的关系
+     *
+     * 如果当前版本小于最新版本, 返回1,
+     * 如果当前版本大于最新版本, 返回-1,
+     * 如果当前版本等于最新版本, 返回0
+     *
+     * 注意: 所有非数字字符都会被忽略
+     *
+     * 例子: 0.1.6.9 和 0.1.6.9 返回0
+     * 例子: 0.1.6.9 和 0.1.7.0 返回1
+     * 例子: 0.1.69  和 0.17.0  返回1
+     * 例子: 0.16.9  和 0.1.70  返回-1
+     *
+     * @param currentVersion 当前版本
+     * @param latestVersion 最新版本
+     * @return 对比值
+     */
+    public static int versionComparison(String currentVersion, String latestVersion)
+    {
+        if (currentVersion == null || latestVersion == null) return 0;
+        String[] currentVersionAfterSplit = removeInNumeric(currentVersion).split("\\.");
+        String[] latestVersionAfterSplit = removeInNumeric(latestVersion).split("\\.");
+
+        int currentLength = currentVersionAfterSplit.length;
+        int latestLength = latestVersionAfterSplit.length;
+
+        for (int i = 0; i < Math.max(currentLength, latestLength); i++)
+        {
+            int currentVersionAtI = i < currentLength ? Integer.parseInt(currentVersionAfterSplit[i]) : 0;
+            int latestVersionAtI = i < latestLength ? Integer.parseInt(latestVersionAfterSplit[i]) : 0;
+
+            if (currentVersionAtI < latestVersionAtI) return 1;
+            if (currentVersionAtI > latestVersionAtI) return -1;
+        }
+        return 0;
+    }
 }
