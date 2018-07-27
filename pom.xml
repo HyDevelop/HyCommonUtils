@@ -6,7 +6,7 @@
 
     <groupId>cc.moecraft</groupId>
     <artifactId>HyCommonUtils</artifactId>
-    <version>1.1.0.5</version>
+    <version>1.2.0</version>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
