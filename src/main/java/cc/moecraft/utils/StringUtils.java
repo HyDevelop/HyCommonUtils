@@ -10,4 +10,18 @@ import java.util.Scanner;
  */
 public class StringUtils
 {
+    /**
+     * 添加HTTP请求参数
+     * @param builder 字符串构造器
+     * @param key 键
+     * @param value 值
+     */
+    public static StringBuilder addParameter(StringBuilder builder, String key, String value)
+    {
+        if (!builder.toString().endsWith("&") || !builder.toString().endsWith("?"))
+        {
+            builder.append("&");
+        }
+        return builder.append(key).append("=").append(value);
+    }
 }
