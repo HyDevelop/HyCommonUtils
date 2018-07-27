@@ -21,4 +21,15 @@ import java.util.Objects;
  */
 public class ReflectUtils
 {
+    /**
+     * 反射获取变量值
+     * @param field Field
+     * @param object 变量
+     * @return 值
+     */
+    public static Object getValue(Field field, Object object) throws IllegalAccessException
+    {
+        field.setAccessible(true);
+        return field.get(object);
+    }
 }
