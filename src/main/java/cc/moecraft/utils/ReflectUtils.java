@@ -32,4 +32,28 @@ public class ReflectUtils
         field.setAccessible(true);
         return field.get(object);
     }
+
+    /**
+     * 获取JsonPrimitive的"getAs***()"方法
+     * @param field Field
+     * @param jsonPrimitive Json原始对象
+     * @return 获取到的方法
+     */
+    public static Method getJsonPrimitiveGetAsMethod(Field field, JsonPrimitive jsonPrimitive)
+    {
+        String fieldSimpleName = field.getType().getSimpleName();
+
+        for (Method method : jsonPrimitive.getClass().getMethods())
+        {
+            if (method.getName().startsWith("getAs"))
+            {
+                String methodName = method.getName();
+
+                methodName = methodName.replaceFirst("getAs", "");
+
+                if (methodName.equalsIgnoreCase(fieldSimpleName)) return method;
+            }
+        }
+        return null;
+    }
 }
