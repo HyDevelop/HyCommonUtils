@@ -202,4 +202,64 @@ public class ReflectUtils
     {
         return targetClass == Float.class || targetClass == float.class;
     }
+
+    /**
+     * 反射替换变量
+     *
+     * 例子:
+     *   输入:
+     *   - object: [username = "Hykilpikonna", user_id = "666666", pp_raw = "99999999"] ( 别想了梦里什么都有
+     *   - format = "[%username%(%user_id%)]: %pp_raw%"
+     *   输出:
+     *   "[Hykilpikonna(666666)]: 99999999"
+     *
+     *   练手 +1
+     *
+     * @param object 对象
+     * @param format 格式
+     * @param positiveSigns 要不要显示+号
+     * @return 替换后的字符串
+     */
+    public static String replaceReflectVariables(Object object, String format, boolean positiveSigns, boolean useGsonNames)
+    {
+        for (Field field : object.getClass().getDeclaredFields())
+        {
+            String fieldName;
+
+            if (useGsonNames)
+            {
+                if (field.isAnnotationPresent(SerializedName.class))
+                    fieldName = field.getAnnotation(SerializedName.class).value();
+                else continue;
+            }
+            else fieldName = field.getName();
+
+            String variableName = String.format("%%%s%%", fieldName);
+
+            field.setAccessible(true);
+
+            try
+            {
+                if (field.get(object) == null) continue;
+
+                String value = field.get(object).toString();
+
+                if (positiveSigns)
+                {
+                    try {
+                        double numericValue = Double.parseDouble(value);
+                        if (numericValue >= 0D) value = "+" + value;
+                    } catch (Exception ignored) { } // 不是数字
+                }
+
+                format = format.replace(variableName, value);
+            }
+            catch (IllegalAccessException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return format;
+    }
 }
