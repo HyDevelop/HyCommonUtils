@@ -2,7 +2,12 @@ package cc.moecraft.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 此类由 Hykilpikonna 在 2017/09/13 创建!
@@ -167,5 +172,28 @@ public class FileUtils
     public static void copy(File source, File dest) throws IOException
     {
         Files.copy(source.toPath(), dest.toPath());
+    }
+
+    /**
+     * 递归获取所有文件夹下的所有文件
+     *
+     * @param existingList 已经有的列表
+     * @param path 根目录
+     * @return 所有文件
+     */
+    public static ArrayList<File> getAllFiles(ArrayList<File> existingList, File path)
+    {
+        if (path.isFile())
+        {
+            if (!existingList.contains(path)) existingList.add(path);
+            return existingList;
+        }
+
+        for (File file : Objects.requireNonNull(path.listFiles()))
+        {
+            existingList = getAllFiles(existingList, file);
+        }
+
+        return existingList;
     }
 }
