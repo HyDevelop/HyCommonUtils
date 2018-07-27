@@ -180,4 +180,15 @@ public class ReflectUtils
 
         return listThatIsConsideredDecimal.contains(targetClass);
     }
+
+    /**
+     * 判断一个类是不是Double
+     *
+     * @param targetClass 目标类
+     * @return 是不是Double
+     */
+    public static boolean isDouble(Class targetClass)
+    {
+        return targetClass == Double.class || targetClass == double.class;
+    }
 }
