@@ -191,4 +191,15 @@ public class ReflectUtils
     {
         return targetClass == Double.class || targetClass == double.class;
     }
+
+    /**
+     * 判断一个类是不是Float
+     *
+     * @param targetClass 目标类
+     * @return 是不是Float
+     */
+    public static boolean isFloat(Class targetClass)
+    {
+        return targetClass == Float.class || targetClass == float.class;
+    }
 }
