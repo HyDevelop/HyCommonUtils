@@ -62,4 +62,23 @@ public class StringUtils
         }
         return 0;
     }
+
+    /**
+     * 去掉字符串里除了数字/小数点外的字符
+     *
+     * @param string 源
+     * @return 处理后
+     */
+    public static String removeInNumeric(String string)
+    {
+        if (string == null || string.equals("")) return "";
+
+        StringBuilder output = new StringBuilder();
+        for (Character aChar : string.toCharArray())
+        {
+            if (Character.isDigit(aChar)) output.append(aChar);
+            if (aChar == '.') output.append('.');
+        }
+        return output.toString();
+    }
 }
