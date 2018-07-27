@@ -67,4 +67,15 @@ public class ReflectUtils
     {
         return getGetterOrSetter(field, object, "get");
     }
+
+    /**
+     * 获取Setter
+     * @param field 变量名
+     * @param object 对象
+     * @return Setter方法
+     */
+    public static Method getSetter(Field field, Object object)
+    {
+        return getGetterOrSetter(field, object, "set");
+    }
 }
