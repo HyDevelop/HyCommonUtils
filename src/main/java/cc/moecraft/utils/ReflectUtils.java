@@ -163,4 +163,21 @@ public class ReflectUtils
 
         return listThatIsConsideredNumeric.contains(targetClass);
     }
+
+    /**
+     * 判断一个类是不是能有小数的类
+     *
+     * @param targetClass 目标类
+     * @return 是不是能有小数的类
+     */
+    public static boolean isDecimal(Class targetClass)
+    {
+        ArrayList<Class> listThatIsConsideredDecimal = new ArrayList<>();
+        listThatIsConsideredDecimal.add(Float.class);
+        listThatIsConsideredDecimal.add(Double.class);
+        listThatIsConsideredDecimal.add(float.class);
+        listThatIsConsideredDecimal.add(double.class);
+
+        return listThatIsConsideredDecimal.contains(targetClass);
+    }
 }
