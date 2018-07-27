@@ -78,4 +78,27 @@ public class ReflectUtils
     {
         return getGetterOrSetter(field, object, "set");
     }
+
+    /**
+     * 获取一个对象类里面定义的Get或者Set方法
+     * @param field 变量名
+     * @param object 对象
+     * @param getOrSet 如果是"get"获取的就是Getter, 如果是"set"获取的就是Setter
+     * @return Get方法或者Set方法
+     */
+    public static Method getGetterOrSetter(Field field, Object object, String getOrSet)
+    {
+        for (Method method : object.getClass().getMethods())
+        {
+            if (method.getName().startsWith(getOrSet))
+            {
+                String methodName = method.getName().toLowerCase();
+
+                methodName = methodName.replaceFirst(getOrSet, "");
+
+                if (methodName.equals(field.getName().toLowerCase())) return method;
+            }
+        }
+        return null;
+    }
 }
