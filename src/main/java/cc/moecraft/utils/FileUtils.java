@@ -232,4 +232,17 @@ public class FileUtils
 
         return filterResult;
     }
+
+    /**
+     * 把一个文件的内容读入String
+     *
+     * @param path 路径
+     * @param encoding 编码
+     * @return String
+     */
+    public static String readFileAsString(String path, Charset encoding) throws IOException
+    {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
 }
