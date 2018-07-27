@@ -196,4 +196,9 @@ public class FileUtils
 
         return existingList;
     }
+
+    public static ArrayList<File> getAllFiles(File path)
+    {
+        return getAllFiles(new ArrayList<>(), path);
+    }
 }
