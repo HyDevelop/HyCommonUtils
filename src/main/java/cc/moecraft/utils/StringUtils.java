@@ -81,4 +81,21 @@ public class StringUtils
         }
         return output.toString();
     }
+
+    /**
+     * 一行内所有首字母大写
+     * @param line 一行
+     * @return 首字母都大写了的一行
+     */
+    public static String capitalizeFirstLetterOfEachWord(String line)
+    {
+        StringBuilder result = new StringBuilder();
+        Scanner lineScan = new Scanner(line);
+        while(lineScan.hasNext())
+        {
+            String word = lineScan.next();
+            result.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+        }
+        return result.toString();
+    }
 }
