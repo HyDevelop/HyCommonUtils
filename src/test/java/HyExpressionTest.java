@@ -17,5 +17,9 @@ public class HyExpressionTest
         System.out.println(HyExpressionResolver.resolve("抽到了: %rp{SSR卡,3,SR卡,17,R卡,40,N卡,40}"));
         System.out.println(HyExpressionResolver.resolve("%var{a,100}%var{b,50}%cal{(a+b)*b}"));
         System.out.println(HyExpressionResolver.resolve("%var{a,%ri{1,100}}%var{b,%rd{0,1}}%cal{(a+b)*(a+b)*%rd{1,2,4}}"));
+
+
+        System.out.println(HyExpressionResolver.resolve("%rp{A卡,-1,N卡,-1}"));
+        System.out.println(HyExpressionResolver.resolve("%rp{A卡,100,N卡,0}"));
     }
 }
