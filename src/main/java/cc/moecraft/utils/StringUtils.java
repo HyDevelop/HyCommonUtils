@@ -120,4 +120,42 @@ public class StringUtils
     {
         return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
     }
+
+    /**
+     * 找到当前层大括号内的东西
+     * @param raw 源字符串
+     * @return 大括号内的东西
+     */
+    public static String findBrackets(String raw)
+    {
+        String result;
+
+        // 层叠等级
+        // 例子:
+        //  { = 1
+        //  {} = 0
+        //  {{{ = 3
+        //  {{{{} = 3
+        int level = 0;
+        int startIndex = -1;
+        int endIndex = raw.length();
+
+        for (int i = 0; i < raw.length(); i++)
+        {
+            char oneChar = raw.charAt(i);
+            if (oneChar == '{')
+            {
+                level++;
+                if (startIndex == -1) startIndex = i;
+            }
+            if (oneChar == '}') level--;
+            if (level == 0 && startIndex != -1)
+            {
+                endIndex = i;
+                break;
+            }
+        }
+
+        return raw.substring(startIndex + 1, endIndex);
+    }
 }
