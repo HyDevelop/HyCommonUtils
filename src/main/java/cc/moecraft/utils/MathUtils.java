@@ -35,4 +35,15 @@ public class MathUtils
         return new Random().nextInt(max + 1 - min) + min;
     }
 
+    /**
+     * 获取随机double
+     * @param min 最小
+     * @param max 最大
+     * @return 随机double
+     */
+    public static double getRandom(double min, double max)
+    {
+        return min + (max - min) * new Random().nextDouble();
+    }
+
 }
