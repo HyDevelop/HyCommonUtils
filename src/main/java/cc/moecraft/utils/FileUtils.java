@@ -2,6 +2,7 @@ package cc.moecraft.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -261,5 +262,17 @@ public class FileUtils
         lines.forEach(line -> stringBuilder.append(line).append("\n"));
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * 从resources导出
+     * @param resourceClass 带resources的类
+     * @throws IOException 复制错误
+     */
+    public static void copyResource(Class resourceClass, String fileName, File toFile) throws IOException, NullPointerException
+    {
+        createDir(toFile.getParent());
+        InputStream resourceAsStream = resourceClass.getClassLoader().getResourceAsStream(fileName);
+        Files.copy(resourceAsStream, Paths.get(toFile.getAbsolutePath()));
     }
 }
