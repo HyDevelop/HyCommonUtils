@@ -24,4 +24,15 @@ public class MathUtils
         return Math.round(original * scale) / scale;
     }
 
+    /**
+     * 获取随机数
+     * @param min 最小
+     * @param max 最大
+     * @return 随机整数
+     */
+    public static int getRandom(int min, int max)
+    {
+        return new Random().nextInt(max + 1 - min) + min;
+    }
+
 }
