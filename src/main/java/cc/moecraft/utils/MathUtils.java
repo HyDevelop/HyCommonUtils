@@ -46,4 +46,16 @@ public class MathUtils
         return min + (max - min) * new Random().nextDouble();
     }
 
+    /**
+     * 获取随机double
+     * @param min 最小
+     * @param max 最大
+     * @param decimals 小数点后几位 ( 0: 1 | 1: 0.1 | 4: 0.0001 )
+     * @return 随机double
+     */
+    public static double getRandom(double min, double max, int decimals)
+    {
+        return round(getRandom(min, max), decimals);
+    }
+
 }
