@@ -105,7 +105,7 @@ public class HyExpressionResolver
         while (matcher.find())
         {
             String[] rpTag = matcher.group().split(",");
-            Map<Double, String> texts = new HashMap<>();
+            Map<Double, String> texts = new LinkedHashMap<>();
 
             double max = 0;
             for (int i = 0; i < rpTag.length; i += 2)
