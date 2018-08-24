@@ -110,7 +110,10 @@ public class HyExpressionResolver
             double max = 0;
             for (int i = 0; i < rpTag.length; i += 2)
             {
-                max += Double.valueOf(rpTag[i + 1]);
+                double chance = Double.valueOf(rpTag[i + 1]);
+                if (chance <= 0) continue;
+
+                max += chance;
                 texts.put(max, rpTag[i]);
             }
 
