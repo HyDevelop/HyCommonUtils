@@ -25,11 +25,29 @@ public class ArrayUtils
      */
     public static String getTheRestArgsAsString(ArrayList<String> args, int index)
     {
+        return getTheRestArgsAsString(args, index, " ");
+    }
+
+    /**
+     * 获取一个指定index后面的所有args
+     *
+     * 例子:
+     *   处理前:
+     *   - args = ["say", "hello", "world"]
+     *   - index = 1
+     *   处理后:
+     *     "hello world"
+     *
+     * @param args args
+     * @param index 位置
+     */
+    public static String getTheRestArgsAsString(ArrayList<String> args, int index, String separator)
+    {
         StringBuilder result = new StringBuilder();
 
         for (int i = index; i < args.size() - 1; i++)
         {
-            result.append(args.get(i)).append(" ");
+            result.append(args.get(i)).append(separator);
         }
 
         return result.append(args.get(args.size() - 1)).toString();
