@@ -12,4 +12,16 @@ import java.util.Random;
  */
 public class MathUtils
 {
+    /**
+     * 四舍五入
+     * @param original 源
+     * @param decimals 小数点后几位 ( 0: 1 | 1: 0.1 | 4: 0.0001 )
+     * @return 四舍五入之后的
+     */
+    public static double round(double original, int decimals)
+    {
+        double scale = Math.pow(10d, decimals);
+        return Math.round(original * scale) / scale;
+    }
+
 }
