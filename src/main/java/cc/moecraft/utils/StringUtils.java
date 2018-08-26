@@ -183,4 +183,25 @@ public class StringUtils
 
         return builder.toString();
     }
+
+    /**
+     * 转换到带逗号的数字
+     *
+     * @param number 数字
+     * @return 带逗号的数字
+     */
+    public static String toNumberWithComma(Object number)
+    {
+        String original = String.valueOf(number);
+        StringBuilder result = new StringBuilder();
+
+        char[] charArray = original.toCharArray();
+        for (int i = 0; i < charArray.length; i++)
+        {
+            if (i % 3 == 0 && i != 0) result.insert(0, ",");
+            result.insert(0, charArray[charArray.length - i - 1]);
+        }
+
+        return String.valueOf(result);
+    }
 }
