@@ -122,7 +122,8 @@ public class StringUtils
     }
 
     /**
-     * 找到当前层大括号内的东西
+     * 找到当前层大括号内的子字符串
+     *
      * @param raw 源字符串
      * @return 大括号内的东西
      */
@@ -157,5 +158,29 @@ public class StringUtils
         }
 
         return raw.substring(startIndex + 1, endIndex);
+    }
+
+    /**
+     * 替换变量
+     * 变量格式: %{变量名}
+     *
+     * @param original 源字符串
+     * @param variablesAndReplacements 变量名和值
+     * @return 替换完的字符串
+     */
+    public static String replaceVariables(String original, Object ... variablesAndReplacements)
+    {
+        StringBuilder builder = new StringBuilder();
+
+        for (String line : original.split("\n"))
+        {
+            for (int i = 0; i < variablesAndReplacements.length; i += 2)
+                line = line.replace("%{" + String.valueOf(variablesAndReplacements[i]) + "}",
+                        String.valueOf(variablesAndReplacements[i + 1]));
+
+            builder.append("\n").append(line);
+        }
+
+        return builder.toString();
     }
 }
