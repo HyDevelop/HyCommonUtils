@@ -204,4 +204,16 @@ public class StringUtils
 
         return String.valueOf(result);
     }
+
+    /**
+     * 限制长度并替换剩余为...
+     *
+     * @param original 源字符串
+     * @param size 最大长度
+     * @return 限制后的字符串
+     */
+    public static String limitSize(String original, int size)
+    {
+        return original.length() <= size ? original : original.substring(0, size - 3) + "...";
+    }
 }
