@@ -13,4 +13,18 @@ import com.google.gson.JsonElement;
  */
 public class JsonUtils
 {
+    /**
+     * 把JSONObject转换为JsonArray的一项
+     *
+     * @param jsonElement Json对象
+     * @return JsonArray
+     */
+    public static JsonArray toJsonArray(JsonElement jsonElement)
+    {
+        if (jsonElement.isJsonArray()) return jsonElement.getAsJsonArray();
+
+        JsonArray result = new JsonArray();
+        result.add(jsonElement);
+        return result;
+    }
 }
