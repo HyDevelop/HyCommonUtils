@@ -43,4 +43,16 @@ public class DownloadUtils
     {
         return getJsonElementFromURL(url, defaultCharset);
     }
+
+    /**
+     * 下载HTTP数据为字符串
+     *
+     * @param url 下载地址
+     * @param charset 字符集
+     * @return 下载到的字符串
+     */
+    public static String downloadAsString(String url, String charset)
+    {
+        return HttpUtil.downloadString(url, Charset.forName(charset));
+    }
 }
