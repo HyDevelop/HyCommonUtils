@@ -172,13 +172,19 @@ public class StringUtils
     {
         StringBuilder builder = new StringBuilder();
 
+        boolean first = true;
         for (String line : original.split("\n"))
         {
             for (int i = 0; i < variablesAndReplacements.length; i += 2)
                 line = line.replace("%{" + String.valueOf(variablesAndReplacements[i]) + "}",
                         String.valueOf(variablesAndReplacements[i + 1]));
 
-            builder.append("\n").append(line);
+            if (first)
+            {
+                builder.append(line);
+                first = false;
+            }
+            else builder.append("\n").append(line);
         }
 
         return builder.toString();
