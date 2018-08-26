@@ -21,4 +21,15 @@ public class DownloadUtils
     @Getter @Setter
     private static String defaultCharset = "utf-8";
 
+    /**
+     * 从URL获取JSON对象
+     *
+     * @param url URL
+     * @param charset 字符集
+     * @return JSON对象
+     */
+    public static JsonElement getJsonElementFromURL(String url, String charset)
+    {
+        return new JsonParser().parse(downloadAsString(url, charset));
+    }
 }
