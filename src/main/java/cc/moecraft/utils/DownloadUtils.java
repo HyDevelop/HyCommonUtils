@@ -55,4 +55,15 @@ public class DownloadUtils
     {
         return HttpUtil.downloadString(url, Charset.forName(charset));
     }
+
+    /**
+     * 下载HTTP数据为字符串
+     *
+     * @param url 下载地址
+     * @return 下载到的字符串
+     */
+    public static String downloadAsString(String url)
+    {
+        return downloadAsString(url, defaultCharset);
+    }
 }
