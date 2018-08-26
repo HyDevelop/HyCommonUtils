@@ -32,4 +32,15 @@ public class DownloadUtils
     {
         return new JsonParser().parse(downloadAsString(url, charset));
     }
+
+    /**
+     * 从URL获取JSON对象
+     *
+     * @param url URL
+     * @return JSON对象
+     */
+    public static JsonElement getJsonElementFromURL(String url)
+    {
+        return getJsonElementFromURL(url, defaultCharset);
+    }
 }
