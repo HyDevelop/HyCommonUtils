@@ -18,4 +18,7 @@ import java.nio.charset.Charset;
  */
 public class DownloadUtils
 {
+    @Getter @Setter
+    private static String defaultCharset = "utf-8";
+
 }
