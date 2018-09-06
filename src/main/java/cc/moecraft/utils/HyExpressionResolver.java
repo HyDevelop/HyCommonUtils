@@ -63,6 +63,7 @@ public class HyExpressionResolver
     }
 
     public static String resolve(String raw)
+    @Getter @Setter
     private boolean safeMode = true;
     {
         Matcher matcher;
