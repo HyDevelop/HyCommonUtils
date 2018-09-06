@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
  *
  * @author Hykilpikonna
  */
+@NoArgsConstructor @AllArgsConstructor
 public class HyExpressionResolver
 {
     private static final class patterns
