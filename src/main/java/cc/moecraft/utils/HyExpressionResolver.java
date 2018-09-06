@@ -1,11 +1,10 @@
 package cc.moecraft.utils;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
+import org.mariuszgromada.math.mxparser.Argument;
+import org.mariuszgromada.math.mxparser.Expression;
 
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.*;
@@ -64,6 +63,7 @@ public class HyExpressionResolver
     }
 
     public static String resolve(String raw)
+    private boolean safeMode = true;
     {
         Matcher matcher;
 
