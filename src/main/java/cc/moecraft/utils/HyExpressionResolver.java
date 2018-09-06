@@ -63,9 +63,26 @@ public class HyExpressionResolver
         }
     }
 
-    public static String resolve(String raw)
     @Getter @Setter
     private boolean safeMode = true;
+
+    /**
+     * 封装解析一条HyExp, 默认安全模式
+     * @param raw 表达式字符串
+     * @return 解析后的结果
+     */
+    public String resolve(String raw)
+    {
+        return resolve(raw, safeMode);
+    }
+
+    /**
+     * 解析一条HyExp
+     * @param raw 表达式字符串
+     * @param safeMode 是否安全模式, 如果是本地用推荐false, 如果是公开推荐true.
+     * @return 解析后的结果
+     */
+    public static String resolve(String raw, boolean safeMode)
     {
         Matcher matcher;
 
