@@ -195,8 +195,10 @@ public class HyExpressionResolver
                 default: return "";
             }
         }
-
-        return raw;
+        catch (Throwable e)
+        {
+            return "[ERR: " + e.getMessage() + "]";
+        }
     }
 
     /**
