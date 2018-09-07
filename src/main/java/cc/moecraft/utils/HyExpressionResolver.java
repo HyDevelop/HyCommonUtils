@@ -245,25 +245,39 @@ public class HyExpressionResolver
         }
     }
 
-        return result;
-    }
-
-    @Data @AllArgsConstructor
-    private static class OperationData implements Comparable<OperationData>
-    {
-        private int start;
-        private Operation operation;
-        private String value;
-
-        @Override
-        public int compareTo(OperationData o)
-        {
-            return start - o.start;
-        }
-    }
-
     private enum Operation
     {
         var, val, cal
+    }
+
+    private static Argument[] toArray(Map<String, Argument> variables)
+    {
+        Argument[] result = new Argument[variables.size()];
+
+        int i = 0;
+        for (Map.Entry<String, Argument> entry : variables.entrySet())
+        {
+            result[i] = entry.getValue();
+            i++;
+        }
+
+        return result;
+    }
+
+    private static String getOperationInString(String raw, int i)
+    {
+        return  "" + raw.charAt(i + 1) + raw.charAt(i + 2) + raw.charAt(i + 3);
+    }
+
+    private static Operation getOperation(String operationInString)
+    {
+        try
+        {
+            return Operation.valueOf(operationInString.toLowerCase());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }
