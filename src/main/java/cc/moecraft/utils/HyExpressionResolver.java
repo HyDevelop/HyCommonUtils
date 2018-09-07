@@ -176,35 +176,23 @@ public class HyExpressionResolver
                 String rawMatch = "%" + operationInString + "{" + inBracketsRaw + "}";
 
                 switch (operation)
+    private static String resolveComplexValueSafe(Operation operation, String[] split, Map<String, Argument> variables, String inBrackets)
+    {
+        try
+        {
+            switch (operation)
+            {
+                case var:
                 {
-                    case var:
-                    {
-                        try
-                        {
-                            engine.eval("var " + split[0] + " = " + ArrayUtils.getTheRestArgsAsString(new ArrayList<>(Arrays.asList(split)), 1, ""));
-                        }
-                        catch (ScriptException e)
-                        {
-                            return "ERROR - " + e.getMessage();
-                        }
-                        return resolveComplex(raw.replace(rawMatch, ""), engine);
-                    }
-                    case val:
-                    {
-                        return resolveComplex(raw.replace(rawMatch, engine.get(inBrackets).toString()), engine);
-                    }
-                    case cal:
-                    {
-                        try
-                        {
-                            return resolveComplex(raw.replace(rawMatch, engine.eval(inBrackets).toString()), engine);
-                        }
-                        catch (ScriptException e)
-                        {
-                            return resolveComplex(raw.replace(rawMatch, e.getMessage()), engine);
-                        }
-                    }
+                    String name = split[0];
+                    String value = ArrayUtils.getTheRestArgsAsString(new ArrayList<>(Arrays.asList(split)), 1, "");
+                    String expression = name + " = " + value;
+                    variables.put(name, new Argument(expression));
+                    return "";
                 }
+                case val: return String.valueOf(variables.get(inBrackets).getArgumentValue());
+                case cal: return String.valueOf(new Expression(inBrackets, toArray(variables)).calculate());
+                default: return "";
             }
         }
 
