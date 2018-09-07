@@ -150,32 +150,32 @@ public class HyExpressionResolver
         return resolveComplex(raw, new ScriptEngineManager().getEngineByName("js"));
     }
 
-    private static String resolveComplex(String raw, ScriptEngine engine)
+    private static String resolveComplexSafe(String raw, Map<String, Argument> variables)
     {
         // complex, 这些是按字符顺序执行的.
         for (int i = 0; i < raw.length(); i++)
         {
             char oneChar = raw.charAt(i);
-            if (oneChar == '%')
-            {
-                String operationInString = "" + raw.charAt(i + 1) + raw.charAt(i + 2) + raw.charAt(i + 3);
-                Operation operation;
+            if (oneChar != '%') continue;
 
-                try
-                {
-                    operation = Operation.valueOf(operationInString.toLowerCase());
-                }
-                catch (Exception e) { continue; }
+            String operationInString = getOperationInString(raw, i);
+            Operation operation = getOperation(operationInString);
+            if (operation == null) continue;
 
-                i += 4;
+            i += 4;
 
-                // 如果有内部大括号先解析内部
-                String inBracketsRaw = StringUtils.findBrackets(raw.substring(i, raw.length() - 1));
-                String inBrackets = resolveComplex(inBracketsRaw, engine);
-                String[] split = inBrackets.split(",");
-                String rawMatch = "%" + operationInString + "{" + inBracketsRaw + "}";
+            // 如果有内部大括号先解析内部
+            String inBracketsRaw = StringUtils.findBrackets(raw.substring(i, raw.length() - 1));
+            String inBrackets = resolveComplexSafe(inBracketsRaw, variables);
+            String[] split = inBrackets.split(",");
+            String rawMatch = "%" + operationInString + "{" + inBracketsRaw + "}";
 
-                switch (operation)
+            return resolveComplexSafe(raw.replace(rawMatch, resolveComplexValueSafe(operation, split, variables, inBrackets)), variables);
+        }
+
+        return raw;
+    }
+
     private static String resolveComplexValueSafe(Operation operation, String[] split, Map<String, Argument> variables, String inBrackets)
     {
         try
