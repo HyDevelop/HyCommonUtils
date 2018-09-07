@@ -227,11 +227,23 @@ public class HyExpressionResolver
         return raw;
     }
 
-    private static ArrayList<String[]> getSplitTags(String original, Pattern pattern)
+    private static String resolveComplexValueJS(Operation operation, String[] split, ScriptEngine engine, String inBrackets)
     {
-        ArrayList<String> tags = getTags(original, pattern);
-        ArrayList<String[]> result = new ArrayList<>();
-        tags.forEach(tag -> result.add(tag.split(",")));
+        try
+        {
+            switch (operation)
+            {
+                case var: engine.eval("var " + split[0] + " = " + ArrayUtils.getTheRestArgsAsString(new ArrayList<>(Arrays.asList(split)), 1, ""));
+                default: return "";
+                case val: return engine.get(inBrackets).toString();
+                case cal: return engine.eval(inBrackets).toString();
+            }
+        }
+        catch (ScriptException e)
+        {
+            return "[ERR: " + e.getMessage() + "]";
+        }
+    }
 
         return result;
     }
