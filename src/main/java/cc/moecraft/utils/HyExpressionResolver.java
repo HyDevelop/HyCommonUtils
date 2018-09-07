@@ -201,19 +201,30 @@ public class HyExpressionResolver
         }
     }
 
-    /**
-     * 获取格式标签
-     * @param original 源字符串
-     * @param pattern 格式
-     * @return 标签数组
-     */
-    private static ArrayList<String> getTags(String original, Pattern pattern)
+    private static String resolveComplexJS(String raw, ScriptEngine engine)
     {
-        ArrayList<String> result = new ArrayList<>();
-        Matcher matcher = pattern.matcher(original);
+        // complex, 这些是按字符顺序执行的.
+        for (int i = 0; i < raw.length(); i++)
+        {
+            char oneChar = raw.charAt(i);
+            if (oneChar != '%') continue;
 
-        while (matcher.find()) result.add(matcher.group());
-        return result;
+            String operationInString = getOperationInString(raw, i);
+            Operation operation = getOperation(operationInString);
+            if (operation == null) continue;
+
+            i += 4;
+
+            // 如果有内部大括号先解析内部
+            String inBracketsRaw = StringUtils.findBrackets(raw.substring(i, raw.length() - 1));
+            String inBrackets = resolveComplexJS(inBracketsRaw, engine);
+            String[] split = inBrackets.split(",");
+            String rawMatch = "%" + operationInString + "{" + inBracketsRaw + "}";
+
+            return resolveComplexJS(raw.replace(rawMatch, resolveComplexValueJS(operation, split, engine, inBrackets)), engine);
+        }
+
+        return raw;
     }
 
     private static ArrayList<String[]> getSplitTags(String original, Pattern pattern)
