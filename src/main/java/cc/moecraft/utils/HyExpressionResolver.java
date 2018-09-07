@@ -147,7 +147,7 @@ public class HyExpressionResolver
             raw = patterns.replace.rp.matcher(raw).replaceFirst(text);
         }
 
-        return resolveComplex(raw, new ScriptEngineManager().getEngineByName("js"));
+        return safeMode ? resolveComplexSafe(raw, new HashMap<>()) : resolveComplexJS(raw, new ScriptEngineManager().getEngineByName("js"));
     }
 
     private static String resolveComplexSafe(String raw, Map<String, Argument> variables)
