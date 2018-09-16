@@ -236,6 +236,19 @@ public class StringUtils
     }
 
     /**
+     * 带变量输出一个字符串
+     * @param printer 日志输出类 (可以是匿名类)
+     * @param text 字符串
+     * @param variables 变量和替换
+     */
+    public static void print(CustomPrinter printer, String text, Object... variables)
+    {
+        text = StringUtils.replaceVariables(text, variables);
+        Scanner scanner = new Scanner(text);
+        while (scanner.hasNextLine()) printer.printLine(scanner.nextLine());
+    }
+
+    /**
      * 输出器
      */
     public interface CustomPrinter
