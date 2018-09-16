@@ -10,4 +10,9 @@ package cc.moecraft.utils;
  */
 public class ClassLoaderUtils
 {
+    public static ClassLoader getClassLoader()
+    {
+        ClassLoader context = Thread.currentThread().getContextClassLoader();
+        return context != null ? context : ClassLoaderUtils.class.getClassLoader();
+    }
 }
