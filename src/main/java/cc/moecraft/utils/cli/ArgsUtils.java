@@ -58,4 +58,14 @@ public class ArgsUtils
 
         return result;
     }
+
+    /**
+     * 从Main的args构造Args对象
+     * @param args args
+     * @return Args对象
+     */
+    public static Args parse(String[] args)
+    {
+        return new Args(getOperations(args), getOptions(args));
+    }
 }
