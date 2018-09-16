@@ -234,4 +234,12 @@ public class StringUtils
     {
         return reader.lines().collect(Collectors.joining("\n"));
     }
+
+    /**
+     * 输出器
+     */
+    public interface CustomPrinter
+    {
+        void printLine(String text);
+    }
 }
