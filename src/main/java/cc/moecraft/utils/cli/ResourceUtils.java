@@ -21,6 +21,17 @@ public class ResourceUtils
 {
     /**
      * 带变量输出一个resource文件
+     * @param printer 日志输出类 (可以是匿名类)
+     * @param name 文件名 / 路径
+     * @param variables 变量和替换
+     */
+    public static void printResource(CustomPrinter printer, String name, Object... variables)
+    {
+        printResource(ClassLoaderUtils.getClassLoader(), printer, name, variables);
+    }
+
+    /**
+     * 带变量输出一个resource文件
      * @param classLoader 带resource的类加载器
      * @param printer 日志输出类 (可以是匿名类)
      * @param name 文件名 / 路径
