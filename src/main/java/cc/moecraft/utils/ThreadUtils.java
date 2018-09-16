@@ -10,4 +10,19 @@ package cc.moecraft.utils;
  */
 public class ThreadUtils
 {
+    /**
+     * 不抛错的休眠
+     * @param ms 时间 (毫秒)
+     */
+    public static void safeSleep(long ms)
+    {
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }
