@@ -242,4 +242,16 @@ public class StringUtils
     {
         void printLine(String text);
     }
+
+    /**
+     * 输出到System.out的简易输出类
+     */
+    public static class SystemOutPrinter implements CustomPrinter
+    {
+        @Override
+        public void printLine(String text)
+        {
+            System.out.println(text);
+        }
+    }
 }
