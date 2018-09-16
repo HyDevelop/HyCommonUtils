@@ -14,6 +14,7 @@ import java.util.Map;
  *
  * @author Hykilpikonna
  */
+@SuppressWarnings("WeakerAccess")
 @Data @AllArgsConstructor
 public class Args
 {
