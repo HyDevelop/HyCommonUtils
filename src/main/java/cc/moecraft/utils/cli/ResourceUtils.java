@@ -20,6 +20,18 @@ import static cc.moecraft.utils.StringUtils.*;
 public class ResourceUtils
 {
     /**
+     * 带变量输出一个resource文件
+     * @param classLoader 带resource的类加载器
+     * @param printer 日志输出类 (可以是匿名类)
+     * @param name 文件名 / 路径
+     * @param variables 变量和替换
+     */
+    public static void printResource(ClassLoader classLoader, CustomPrinter printer, String name, Object... variables)
+    {
+        print(printer, readResource(classLoader, name), variables);
+    }
+
+    /**
      * 带变量读取一个resource文件
      * @param classLoader 带resource的类加载器
      * @param name 文件名 / 路径
