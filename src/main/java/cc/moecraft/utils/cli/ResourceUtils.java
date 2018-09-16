@@ -1,12 +1,12 @@
 package cc.moecraft.utils.cli;
 
 import cc.moecraft.utils.ClassLoaderUtils;
-import cc.moecraft.utils.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
+
+import static cc.moecraft.utils.StringUtils.*;
 
 /**
  * 此类由 Hykilpikonna 在 2018/09/16 创建!
@@ -19,4 +19,20 @@ import java.util.Scanner;
 @SuppressWarnings("WeakerAccess")
 public class ResourceUtils
 {
+    /**
+     * 带变量读取一个resource文件
+     * @param classLoader 带resource的类加载器
+     * @param name 文件名 / 路径
+     */
+    public static String readResource(ClassLoader classLoader, String name)
+    {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(classLoader.getResourceAsStream(name))))
+        {
+            return readToString(reader);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }
