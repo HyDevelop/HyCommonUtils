@@ -2,8 +2,6 @@ package cc.moecraft.utils;
 
 import org.apache.commons.codec.binary.Base32;
 
-import java.io.UnsupportedEncodingException;
-
 /**
  * 此类由 Hykilpikonna 在 2018/06/13 创建!
  * Created by Hykilpikonna on 2018/06/13!
