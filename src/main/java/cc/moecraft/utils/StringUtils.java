@@ -1,6 +1,8 @@
 package cc.moecraft.utils;
 
+import java.io.BufferedReader;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * 此类由 Hykilpikonna 在 2018/04/24 创建!
@@ -221,5 +223,15 @@ public class StringUtils
     public static String limitSize(String original, int size)
     {
         return original.length() <= size ? original : original.substring(0, size - 3) + "...";
+    }
+
+    /**
+     * 把BufferedReader读到字符串
+     * @param reader BufferedReader
+     * @return 字符串
+     */
+    public static String readToString(BufferedReader reader)
+    {
+        return reader.lines().collect(Collectors.joining("\n"));
     }
 }
