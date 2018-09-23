@@ -7,7 +7,7 @@
   </h4>
   <h5 align="center">
 <a href="https://circleci.com/gh/HyDevelop/HyCommonUtils">CircleCI</a>&nbsp;&nbsp;
-<a href="#maven">Maven导入</a>&nbsp;&nbsp;
+<a href="#maven">Maven 导入</a>&nbsp;&nbsp;
 <a href="https://hydevelop.github.io/HyCommonUtils/">开发文档</a>&nbsp;&nbsp;
 <a href="#license">开源条款</a>
 </h5>
@@ -21,7 +21,7 @@
 Maven 导入:
 --------
 
-没有添加JitPack的Repo的话首先添加Repo, 在pom里面把这些粘贴进去:
+没有添加 JitPack 的 Repo 的话首先添加 Repo, 在 pom 里面把这些粘贴进去:
 
 ```xml
 <repositories>
@@ -42,7 +42,7 @@ Maven 导入:
 </dependency>
 ```
 
-然后ReImport之后就导入好了!
+然后 ReImport 之后就导入好了!
 
 <br>
 
@@ -50,7 +50,7 @@ Maven 导入:
 Gradle 导入:
 --------
 
-没有添加JitPack的Repo的话首先添加Repo, 在pom里面把这些粘贴进去:
+没有添加 JitPack 的 Repo 的话首先添加 Repo, 在 pom 里面把这些粘贴进去:
 
 ```gradle
 allprojects {
