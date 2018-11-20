@@ -14,6 +14,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.regex.Pattern.DOTALL;
+import static java.util.regex.Pattern.MULTILINE;
+
 /**
  * 此类由 Hykilpikonna 在 2018/08/24 创建!
  * Created by Hykilpikonna on 2018/08/24!
@@ -51,18 +54,18 @@ public class HyExpressionResolver
     {
         private static final class find
         {
-            private static final Pattern ri = Pattern.compile("(?<=%ri\\{)[-0-9,.]*?(?=})");
-            private static final Pattern rd = Pattern.compile("(?<=%rd\\{)[-0-9,.]*?(?=})");
-            private static final Pattern rs = Pattern.compile("(?<=%rs\\{).*?(?=})");
-            private static final Pattern rp = Pattern.compile("(?<=%rp\\{).*?(?=})");
+            private static final Pattern ri = Pattern.compile("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})");
+            private static final Pattern rd = Pattern.compile("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})");
+            private static final Pattern rs = Pattern.compile("(?ms)(?<=%rs\\{).*?(?=})");
+            private static final Pattern rp = Pattern.compile("(?ms)(?<=%rp\\{).*?(?=})");
         }
 
         private static final class replace
         {
-            private static final Pattern ri = Pattern.compile("%ri\\{[-0-9,.]*?}");
-            private static final Pattern rd = Pattern.compile("%rd\\{[-0-9,.]*?}");
-            private static final Pattern rs = Pattern.compile("%rs\\{.*?}");
-            private static final Pattern rp = Pattern.compile("%rp\\{.*?}");
+            private static final Pattern ri = Pattern.compile("(?ms)%ri\\{[-0-9,.]*?}");
+            private static final Pattern rd = Pattern.compile("(?ms)%rd\\{[-0-9,.]*?}");
+            private static final Pattern rs = Pattern.compile("(?ms)%rs\\{.*?}");
+            private static final Pattern rp = Pattern.compile("(?ms)%rp\\{.*?}");
         }
     }
 
