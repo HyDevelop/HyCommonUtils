@@ -35,5 +35,7 @@ public class HyExpressionTest
 
         System.out.println(resolver.resolve("%rp{A卡,-1,N卡,-1}"));
         System.out.println(resolver.resolve("%rp{A卡,100,N卡,0}"));
+
+        System.out.println(resolver.resolve("%rs{A的第一行\nA的第二行,B的第一行\nB的第二行}"));
     }
 }
