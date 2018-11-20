@@ -90,6 +90,8 @@ public class HyExpressionResolver
      */
     public static String resolve(String raw, boolean safeMode)
     {
+        if (raw == null || raw.isEmpty()) return "";
+
         Matcher matcher;
 
         // ri
