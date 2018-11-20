@@ -113,6 +113,24 @@ public class HyExpressionResolver
 
         boolean preserveSpace = false;
         boolean resolveCommands = false;
+
+        // %pref{} (Preferences)
+        matcher = patterns.find.pref.matcher(raw);
+        while (matcher.find())
+        {
+            String[] tags = matcher.group().toLowerCase().replace(" ", "").replace("\n", "").split(",");
+
+            for (String tag : tags)
+            {
+                switch (tag)
+                {
+                    case "ps": preserveSpace = true; continue;
+                    case "rc": resolveCommands = true; continue;
+                    case "no": return patterns.replace.pref.matcher(raw).replaceAll("");
+                    default: return "Error: PREF标签" + tag + "未识别";
+                }
+            }
+        }
         // ri
         matcher = patterns.find.ri.matcher(raw);
         while (matcher.find())
