@@ -267,4 +267,16 @@ public class StringUtils
             System.out.println(text);
         }
     }
+
+    /**
+     * Make all spaces single space.
+     *
+     * @param original Original String
+     * @return Modified string.
+     */
+    public static String trimSpaces(String original)
+    {
+        while (original.contains("  ")) original = original.replace("  ", " ");
+        return original;
+    }
 }
