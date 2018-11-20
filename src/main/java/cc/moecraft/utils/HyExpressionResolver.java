@@ -70,6 +70,8 @@ public class HyExpressionResolver
             private static final Pattern rd = Pattern.compile("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})");
             private static final Pattern rs = Pattern.compile("(?ms)(?<=%rs\\{).*?(?=})");
             private static final Pattern rp = Pattern.compile("(?ms)(?<=%rp\\{).*?(?=})");
+
+            private static final Pattern pref = Pattern.compile("(?ms)(?<=%pref\\{).*?(?=})");
         }
 
         private static final class replace
@@ -78,6 +80,8 @@ public class HyExpressionResolver
             private static final Pattern rd = Pattern.compile("(?ms)%rd\\{[-0-9,.]*?}");
             private static final Pattern rs = Pattern.compile("(?ms)%rs\\{.*?}");
             private static final Pattern rp = Pattern.compile("(?ms)%rp\\{.*?}");
+
+            private static final Pattern pref = Pattern.compile("(?ms)%pref\\{.*?}");
         }
     }
 
