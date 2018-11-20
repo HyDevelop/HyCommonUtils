@@ -106,10 +106,13 @@ public class HyExpressionResolver
      */
     public static String resolve(String raw, boolean safeMode)
     {
+        // Detects if it is empty.
         if (raw == null || raw.isEmpty()) return "";
 
         Matcher matcher;
 
+        boolean preserveSpace = false;
+        boolean resolveCommands = false;
         // ri
         matcher = patterns.find.ri.matcher(raw);
         while (matcher.find())
