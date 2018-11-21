@@ -99,19 +99,20 @@ public class HyExpression
         if (resolveCommands) input = escape(input);
 
         // %ac{} (Append chars)
-        process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
+        input = process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
 
         // %ri{} (Random int)
-        process(patterns.find.ri, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
+        input = process(patterns.find.ri, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
 
         // %rd{} (Random double)
-        process(patterns.find.rd, input, tags -> round(getRandom(parseDouble(tags[0]),parseDouble(tags[1])), tags.length == 3 ? parseInt(tags[2]) : 2));
+        input = process(patterns.find.rd, input, tags -> round(getRandom(parseDouble(tags[0]), parseDouble(tags[1])),
+                tags.length == 3 ? parseInt(tags[2]) : 2));
 
         // %rs{} (Random string)
-        process(patterns.find.rs, input, tags -> tags[getRandom(0, tags.length - 1)]);
+        input = process(patterns.find.rs, input, tags -> tags[getRandom(0, tags.length - 1)]);
 
         // %rp{} (Random strings with defined possibility)
-        process(patterns.find.rp, input, tags ->
+        input = process(patterns.find.rp, input, tags ->
         {
             Map<Double, String> texts = new LinkedHashMap<>();
 
