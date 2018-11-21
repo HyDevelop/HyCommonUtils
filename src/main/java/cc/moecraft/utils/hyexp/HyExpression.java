@@ -63,7 +63,6 @@ import static java.lang.Integer.parseInt;
  *
  * @author Hykilpikonna
  */
-@NoArgsConstructor @AllArgsConstructor
 public class HyExpression
 {
     /**
