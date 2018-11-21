@@ -38,7 +38,7 @@ class HyExpUtils
     static String process(Pattern pattern, String original, HyExpPreProcessor preProcessor, HyExpProcessor processor)
     {
         Matcher matcher = pattern.matcher(original);
-        while (matcher.find()) original = processor.process(preProcessor.preProcess(matcher.group()).split(","));
+        while (matcher.find()) original = String.valueOf(processor.process(preProcessor.preProcess(matcher.group()).split(",")));
         return original;
     }
 }

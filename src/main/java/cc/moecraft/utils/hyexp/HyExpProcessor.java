@@ -10,5 +10,5 @@ package cc.moecraft.utils.hyexp;
  */
 interface HyExpProcessor
 {
-    String process(String[] tags);
+    Object process(String[] tags);
 }
