@@ -283,4 +283,26 @@ public class StringUtils
         while (original.contains("  ")) original = original.replace("  ", " ");
         return original;
     }
+
+    /**
+     * Replace escape sequence in string to the actual escape value.
+     * 替换转义
+     *
+     * e.g. If you input a string saying "\n", it's going to be in memory as "\\n".
+     *      After calling this method, it gets replaced to "\n", the actual newline character.
+     *
+     * @param original None-escaped text.
+     * @return Escaped text.
+     */
+    public static String escape(String original)
+    {
+        return original
+                .replace("\\b", "\b")
+                .replace("\\n", "\n")
+                .replace("\\t", "\t")
+                .replace("\\r", "\r")
+                .replace("\\f", "\f")
+                .replace("\\\"", "\"")
+                .replace("\\\\", "\\");
+    }
 }
