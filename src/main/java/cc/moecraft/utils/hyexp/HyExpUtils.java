@@ -13,6 +13,18 @@ import java.util.regex.Pattern;
  */
 class HyExpUtils
 {
+    /**
+     * Process a tag.
+     *
+     * @param pattern Pattern
+     * @param original Original String.
+     * @param processor Processor for processing the tag.
+     * @return Result.
+     */
+    static String process(Pattern pattern, String original, HyExpProcessor processor)
+    {
+        return process(pattern, original, raw -> raw, processor);
+    }
 
     /**
      * Process a tag.
