@@ -6,9 +6,11 @@ import org.mariuszgromada.math.mxparser.Argument;
 import org.mariuszgromada.math.mxparser.Expression;
 
 import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,9 +21,14 @@ import java.util.Map;
  *
  * @author Hykilpikonna
  */
-public class HyExpComplexUtils
+class HyExpComplexUtils
 {
-    static String resolveComplexSafe(String raw, Map<String, Argument> variables)
+    static String resolveComplexSafe(String raw)
+    {
+        return resolveComplexSafe(raw, new HashMap<>());
+    }
+
+    private static String resolveComplexSafe(String raw, Map<String, Argument> variables)
     {
         // complex, 这些是按字符顺序执行的.
         for (int i = 0; i < raw.length(); i++)
@@ -47,7 +54,7 @@ public class HyExpComplexUtils
         return raw;
     }
 
-    static String resolveComplexHelperSafe(Operation operation, String[] split, Map<String, Argument> variables, String inBrackets)
+    private static String resolveComplexHelperSafe(Operation operation, String[] split, Map<String, Argument> variables, String inBrackets)
     {
         try
         {
@@ -72,7 +79,12 @@ public class HyExpComplexUtils
         }
     }
 
-    static String resolveComplexJS(String raw, ScriptEngine engine)
+    static String resolveComplexJS(String raw)
+    {
+        return resolveComplexJS(raw, new ScriptEngineManager().getEngineByName("js"));
+    }
+
+    private static String resolveComplexJS(String raw, ScriptEngine engine)
     {
         // complex, 这些是按字符顺序执行的.
         for (int i = 0; i < raw.length(); i++)
