@@ -10,11 +10,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 
 import static cc.moecraft.utils.MathUtils.getRandom;
+import static cc.moecraft.utils.MathUtils.round;
 import static cc.moecraft.utils.StringUtils.repeat;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexJS;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
 import static cc.moecraft.utils.hyexp.HyExpPatterns.patterns;
 import static cc.moecraft.utils.hyexp.HyExpUtils.process;
+import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
@@ -108,18 +110,8 @@ public class HyExpression
         // %ri{}
         process(patterns.find.ri, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
 
-        // rd
-        matcher = patterns.find.rd.matcher(input);
-        while (matcher.find())
-        {
-            String[] rdTag = matcher.group().split(",");
-
-            double num0 = Double.parseDouble(rdTag[0]);
-            double num1 = Double.parseDouble(rdTag[1]);
-            int round = rdTag.length == 3 ? parseInt(rdTag[2]) : 2;
-
-            input = patterns.replace.rd.matcher(input).replaceFirst(String.valueOf(MathUtils.round(getRandom(Math.min(num0, num1), Math.max(num0, num1)), round)));
-        }
+        // %rd{}
+        process(patterns.find.rd, input, tags -> round(getRandom(parseDouble(tags[0]),parseDouble(tags[1])), tags.length == 3 ? parseInt(tags[2]) : 2));
 
         // rs
         matcher = patterns.find.rs.matcher(input);
