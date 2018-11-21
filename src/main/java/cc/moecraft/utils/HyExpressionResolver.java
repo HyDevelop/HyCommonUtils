@@ -131,6 +131,12 @@ public class HyExpressionResolver
                 }
             }
         }
+
+        // Actually implementing the settings.
+        if (!preserveSpace) raw = StringUtils.trimSpaces(raw);
+        if (resolveCommands) raw = StringUtils.escape(raw);
+
+
         // ri
         matcher = patterns.find.ri.matcher(raw);
         while (matcher.find())
