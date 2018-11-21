@@ -18,34 +18,34 @@ class HyExpPatterns
     static final Patterns patterns = new Patterns();
     static final class Patterns
     {
-        static final Find find = new Find();
+        final Find find = new Find();
         static final class Find
         {
-            static final Pattern ri = Pattern.compile("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})");
-            static final Pattern rd = Pattern.compile("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})");
-            static final Pattern rs = Pattern.compile("(?ms)(?<=%rs\\{).*?(?=})");
-            static final Pattern rp = Pattern.compile("(?ms)(?<=%rp\\{).*?(?=})");
+            final Pattern ri = Pattern.compile("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})");
+            final Pattern rd = Pattern.compile("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})");
+            final Pattern rs = Pattern.compile("(?ms)(?<=%rs\\{).*?(?=})");
+            final Pattern rp = Pattern.compile("(?ms)(?<=%rp\\{).*?(?=})");
 
-            static final Pattern ac = Pattern.compile("(?ms)(?<=%ac\\{).*?(?=})");
-            static final Pattern cp = Pattern.compile("(?ms)(?<=%cp\\{).*?(?=})");
-            static final Pattern ca = Pattern.compile("(?ms)(?<=%ca\\{).*?(?=})");
+            final Pattern ac = Pattern.compile("(?ms)(?<=%ac\\{).*?(?=})");
+            final Pattern cp = Pattern.compile("(?ms)(?<=%cp\\{).*?(?=})");
+            final Pattern ca = Pattern.compile("(?ms)(?<=%ca\\{).*?(?=})");
 
-            static final Pattern pref = Pattern.compile("(?ms)(?<=%pref\\{).*?(?=})");
+            final Pattern pref = Pattern.compile("(?ms)(?<=%pref\\{).*?(?=})");
         }
 
-        static final Replace replace = new Replace();
+        final Replace replace = new Replace();
         static final class Replace
         {
-            static final Pattern ri = Pattern.compile("(?ms)%ri\\{[-0-9,.]*?}");
-            static final Pattern rd = Pattern.compile("(?ms)%rd\\{[-0-9,.]*?}");
-            static final Pattern rs = Pattern.compile("(?ms)%rs\\{.*?}");
-            static final Pattern rp = Pattern.compile("(?ms)%rp\\{.*?}");
+            final Pattern ri = Pattern.compile("(?ms)%ri\\{[-0-9,.]*?}");
+            final Pattern rd = Pattern.compile("(?ms)%rd\\{[-0-9,.]*?}");
+            final Pattern rs = Pattern.compile("(?ms)%rs\\{.*?}");
+            final Pattern rp = Pattern.compile("(?ms)%rp\\{.*?}");
 
-            static final Pattern ac = Pattern.compile("(?ms)%ac\\{.*?}");
-            static final Pattern cp = Pattern.compile("(?ms)%cp\\{.*?}");
-            static final Pattern ca = Pattern.compile("(?ms)%ca\\{.*?}");
+            final Pattern ac = Pattern.compile("(?ms)%ac\\{.*?}");
+            final Pattern cp = Pattern.compile("(?ms)%cp\\{.*?}");
+            final Pattern ca = Pattern.compile("(?ms)%ca\\{.*?}");
 
-            static final Pattern pref = Pattern.compile("(?ms)%pref\\{.*?}");
+            final Pattern pref = Pattern.compile("(?ms)%pref\\{.*?}");
         }
     }
 }
