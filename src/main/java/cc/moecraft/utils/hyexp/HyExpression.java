@@ -9,9 +9,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 
+import static cc.moecraft.utils.StringUtils.repeat;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexJS;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
 import static cc.moecraft.utils.hyexp.HyExpPatterns.patterns;
+import static java.lang.Integer.parseInt;
 
 /**
  * 此类由 Hykilpikonna 在 2018/08/24 创建!
@@ -98,18 +100,9 @@ public class HyExpression
         if (resolveCommands) input = StringUtils.escape(input);
 
         // %ac{} (Append chars)
-        matcher = patterns.find.ac.matcher(input);
-        while (matcher.find())
-        {
-            String[] tags = matcher.group().split(",");
+        HyExpUtils.process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
 
-            String text = tags[0];
-            int times = Integer.parseInt(tags[1]);
-
-            input = patterns.replace.ac.matcher(input).replaceFirst()
-        }
-
-        // ri
+        // %ri{}
         matcher = patterns.find.ri.matcher(input);
         while (matcher.find())
         {
@@ -129,7 +122,7 @@ public class HyExpression
 
             double num0 = Double.parseDouble(rdTag[0]);
             double num1 = Double.parseDouble(rdTag[1]);
-            int round = rdTag.length == 3 ? Integer.parseInt(rdTag[2]) : 2;
+            int round = rdTag.length == 3 ? parseInt(rdTag[2]) : 2;
 
             input = patterns.replace.rd.matcher(input).replaceFirst(String.valueOf(MathUtils.round(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1)), round)));
         }
