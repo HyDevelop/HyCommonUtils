@@ -324,4 +324,20 @@ public class StringUtils
                 .replace("\"", "\\\"")
                 .replace("\\", "\\\\");
     }
+
+    /**
+     * Repeat a string how many times.
+     * 把一个字符串重复多少遍.
+     *
+     * @param text The string
+     * @param times How many times.
+     * @return Repeated string.
+     */
+    public static String repeat(String text, int times)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < times; i++) result.append(text);
+        return result.toString();
+    }
 }
