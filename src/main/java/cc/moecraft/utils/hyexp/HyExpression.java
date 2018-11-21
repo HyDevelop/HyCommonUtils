@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import static cc.moecraft.utils.MathUtils.*;
 import static cc.moecraft.utils.StringUtils.*;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.*;
-import static cc.moecraft.utils.hyexp.HyExpPatterns.*;
 import static cc.moecraft.utils.hyexp.HyExpUtils.*;
 
 import static java.lang.Double.parseDouble;

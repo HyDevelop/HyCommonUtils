@@ -1,7 +1,6 @@
 package cc.moecraft.utils.hyexp;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 此类由 Hykilpikonna 在 2018/11/20 创建!
@@ -21,7 +20,7 @@ class HyExpUtils
      * @param processor Processor for processing the tag.
      * @return Result.
      */
-    static String process(Pattern pattern, String original, HyExpProcessor processor)
+    static String process(HyExpPattern pattern, String original, HyExpProcessor processor)
     {
         return process(pattern, original, raw -> raw, processor);
     }
@@ -35,10 +34,11 @@ class HyExpUtils
      * @param processor Processor for processing the tag.
      * @return Result.
      */
-    static String process(Pattern pattern, String original, HyExpPreProcessor preProcessor, HyExpProcessor processor)
+    static String process(HyExpPattern pattern, String original, HyExpPreProcessor preProcessor, HyExpProcessor processor)
     {
-        Matcher matcher = pattern.matcher(original);
-        while (matcher.find()) original = String.valueOf(processor.process(preProcessor.preProcess(matcher.group()).split(",")));
+        Matcher matcher = pattern.find.matcher(original);
+        while (matcher.find()) original = pattern.replace.matcher(original).replaceFirst(
+                String.valueOf(processor.process(preProcessor.preProcess(matcher.group()).split(","))));
         return original;
     }
 }
