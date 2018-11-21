@@ -1,22 +1,16 @@
 package cc.moecraft.utils.hyexp;
 
-import cc.moecraft.utils.MathUtils;
-import cc.moecraft.utils.StringUtils;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
-import static cc.moecraft.utils.MathUtils.getRandom;
-import static cc.moecraft.utils.MathUtils.round;
-import static cc.moecraft.utils.StringUtils.repeat;
-import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexJS;
-import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
-import static cc.moecraft.utils.hyexp.HyExpPatterns.patterns;
-import static cc.moecraft.utils.hyexp.HyExpUtils.process;
+import static cc.moecraft.utils.MathUtils.*;
+import static cc.moecraft.utils.StringUtils.*;
+import static cc.moecraft.utils.hyexp.HyExpComplexUtils.*;
+import static cc.moecraft.utils.hyexp.HyExpPatterns.*;
+import static cc.moecraft.utils.hyexp.HyExpUtils.*;
+
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -101,8 +95,8 @@ public class HyExpression
         }
 
         // Actually implementing the settings.
-        if (!preserveSpace) input = StringUtils.trimSpaces(input);
-        if (resolveCommands) input = StringUtils.escape(input);
+        if (!preserveSpace) input = trimSpaces(input);
+        if (resolveCommands) input = escape(input);
 
         // %ac{} (Append chars)
         process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
