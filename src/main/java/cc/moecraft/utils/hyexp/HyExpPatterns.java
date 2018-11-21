@@ -1,5 +1,7 @@
 package cc.moecraft.utils.hyexp;
 
+import lombok.Getter;
+
 import java.util.regex.Pattern;
 
 /**
@@ -10,42 +12,24 @@ import java.util.regex.Pattern;
  *
  * @author Hykilpikonna
  */
-class HyExpPatterns
+@Getter
+enum HyExpPatterns
 {
-    // Don't ask me why I write code like this.
-    // It looks good and understandable. (?)
+    RI("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})", "(?ms)%ri\\{[-0-9,.]*?}"),
+    RD("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})", "(?ms)%rd\\{[-0-9,.]*?}"),
+    RS("(?ms)(?<=%rs\\{).*?(?=})", "(?ms)%rs\\{.*?}"),
+    RP("(?ms)(?<=%rp\\{).*?(?=})", "(?ms)%rp\\{.*?}"),
+    AC("(?ms)(?<=%ac\\{).*?(?=})", "(?ms)%ac\\{.*?}"),
+    CP("(?ms)(?<=%cp\\{).*?(?=})", "(?ms)%cp\\{.*?}"),
+    CA("(?ms)(?<=%ca\\{).*?(?=})", "(?ms)%ca\\{.*?}"),
+    PREF("(?ms)(?<=%pref\\{).*?(?=})", "(?ms)%pref\\{.*?}");
 
-    static final Patterns patterns = new Patterns();
-    static final class Patterns
+    final Pattern find;
+    final Pattern replace;
+
+    HyExpPatterns(String find, String replace)
     {
-        final Find find = new Find();
-        static final class Find
-        {
-            final Pattern ri = Pattern.compile("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})");
-            final Pattern rd = Pattern.compile("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})");
-            final Pattern rs = Pattern.compile("(?ms)(?<=%rs\\{).*?(?=})");
-            final Pattern rp = Pattern.compile("(?ms)(?<=%rp\\{).*?(?=})");
-
-            final Pattern ac = Pattern.compile("(?ms)(?<=%ac\\{).*?(?=})");
-            final Pattern cp = Pattern.compile("(?ms)(?<=%cp\\{).*?(?=})");
-            final Pattern ca = Pattern.compile("(?ms)(?<=%ca\\{).*?(?=})");
-
-            final Pattern pref = Pattern.compile("(?ms)(?<=%pref\\{).*?(?=})");
-        }
-
-        final Replace replace = new Replace();
-        static final class Replace
-        {
-            final Pattern ri = Pattern.compile("(?ms)%ri\\{[-0-9,.]*?}");
-            final Pattern rd = Pattern.compile("(?ms)%rd\\{[-0-9,.]*?}");
-            final Pattern rs = Pattern.compile("(?ms)%rs\\{.*?}");
-            final Pattern rp = Pattern.compile("(?ms)%rp\\{.*?}");
-
-            final Pattern ac = Pattern.compile("(?ms)%ac\\{.*?}");
-            final Pattern cp = Pattern.compile("(?ms)%cp\\{.*?}");
-            final Pattern ca = Pattern.compile("(?ms)%ca\\{.*?}");
-
-            final Pattern pref = Pattern.compile("(?ms)%pref\\{.*?}");
-        }
+        this.find = Pattern.compile(find);
+        this.replace = Pattern.compile(replace);
     }
 }
