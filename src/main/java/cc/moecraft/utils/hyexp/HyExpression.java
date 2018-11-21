@@ -113,13 +113,8 @@ public class HyExpression
         // %rd{}
         process(patterns.find.rd, input, tags -> round(getRandom(parseDouble(tags[0]),parseDouble(tags[1])), tags.length == 3 ? parseInt(tags[2]) : 2));
 
-        // rs
-        matcher = patterns.find.rs.matcher(input);
-        while (matcher.find())
-        {
-            String[] rsTag = matcher.group().split(",");
-            input = patterns.replace.rs.matcher(input).replaceFirst(rsTag[getRandom(0, rsTag.length - 1)]);
-        }
+        // %rs{}
+        process(patterns.find.rs, input, tags -> tags[getRandom(0, tags.length - 1)]);
 
         // rp
         matcher = patterns.find.rp.matcher(input);
