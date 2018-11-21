@@ -3,7 +3,6 @@ package cc.moecraft.utils;
 import cc.moecraft.utils.hyexp.HyExpression;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,7 +16,6 @@ import lombok.Setter;
  * @author Hykilpikonna
  */
 @AllArgsConstructor
-@Deprecated
 public class HyExpressionResolver
 {
     @Getter @Setter
@@ -28,9 +26,7 @@ public class HyExpressionResolver
      *
      * @param raw 表达式字符串
      * @return 解析后的结果
-     * @deprecated 移动到了HyExpression类
      */
-    @Deprecated
     public String resolve(String raw)
     {
         return HyExpression.resolve(raw, safeMode);
