@@ -13,6 +13,7 @@ import static cc.moecraft.utils.StringUtils.repeat;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexJS;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
 import static cc.moecraft.utils.hyexp.HyExpPatterns.patterns;
+import static cc.moecraft.utils.hyexp.HyExpUtils.process;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -100,7 +101,7 @@ public class HyExpression
         if (resolveCommands) input = StringUtils.escape(input);
 
         // %ac{} (Append chars)
-        HyExpUtils.process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
+        process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
 
         // %ri{}
         matcher = patterns.find.ri.matcher(input);
