@@ -2,6 +2,9 @@ package cc.moecraft.utils;
 
 import java.util.Random;
 
+import static java.lang.Math.*;
+import static java.lang.Math.min;
+
 /**
  * 此类由 Hykilpikonna 在 2018/08/24 创建!
  * Created by Hykilpikonna on 2018/08/24!
@@ -20,7 +23,7 @@ public class MathUtils
      */
     public static double round(double original, int decimals)
     {
-        double scale = Math.pow(10d, decimals);
+        double scale = pow(10d, decimals);
         return Math.round(original * scale) / scale;
     }
 
@@ -37,24 +40,28 @@ public class MathUtils
 
     /**
      * 获取随机double
-     * @param min 最小
-     * @param max 最大
+     * @param range1 最小
+     * @param range2 最大
      * @return 随机double
      */
-    public static double getRandom(double min, double max)
+    public static double getRandom(double range1, double range2)
     {
+        double min = min(range1, range2);
+        double max = max(range1, range2);
         return min + (max - min) * new Random().nextDouble();
     }
 
     /**
      * 获取随机double
-     * @param min 最小
-     * @param max 最大
+     * @param range1 最小
+     * @param range2 最大
      * @param decimals 小数点后几位 ( 0: 1 | 1: 0.1 | 4: 0.0001 )
      * @return 随机double
      */
-    public static double getRandom(double min, double max, int decimals)
+    public static double getRandom(double range1, double range2, int decimals)
     {
+        double min = min(range1, range2);
+        double max = max(range1, range2);
         return round(getRandom(min, max), decimals);
     }
 
@@ -143,7 +150,7 @@ public class MathUtils
 
                 else throw new RuntimeException("Unexpected: " + (char)ch);
 
-                if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
+                if (eat('^')) x = pow(x, parseFactor()); // exponentiation
 
                 return x;
             }
