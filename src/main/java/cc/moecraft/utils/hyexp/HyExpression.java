@@ -9,11 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 
+import static cc.moecraft.utils.MathUtils.getRandom;
 import static cc.moecraft.utils.StringUtils.repeat;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexJS;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
 import static cc.moecraft.utils.hyexp.HyExpPatterns.patterns;
 import static cc.moecraft.utils.hyexp.HyExpUtils.process;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -104,16 +106,7 @@ public class HyExpression
         process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
 
         // %ri{}
-        matcher = patterns.find.ri.matcher(input);
-        while (matcher.find())
-        {
-            String[] riTag = matcher.group().split(",");
-
-            int num0 = Math.round(Float.parseFloat(riTag[0]));
-            int num1 = Math.round(Float.parseFloat(riTag[1]));
-
-            input = patterns.replace.ri.matcher(input).replaceFirst(String.valueOf(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1))));
-        }
+        process(patterns.find.ri, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
 
         // rd
         matcher = patterns.find.rd.matcher(input);
@@ -125,7 +118,7 @@ public class HyExpression
             double num1 = Double.parseDouble(rdTag[1]);
             int round = rdTag.length == 3 ? parseInt(rdTag[2]) : 2;
 
-            input = patterns.replace.rd.matcher(input).replaceFirst(String.valueOf(MathUtils.round(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1)), round)));
+            input = patterns.replace.rd.matcher(input).replaceFirst(String.valueOf(MathUtils.round(getRandom(Math.min(num0, num1), Math.max(num0, num1)), round)));
         }
 
         // rs
@@ -133,7 +126,7 @@ public class HyExpression
         while (matcher.find())
         {
             String[] rsTag = matcher.group().split(",");
-            input = patterns.replace.rs.matcher(input).replaceFirst(rsTag[MathUtils.getRandom(0, rsTag.length - 1)]);
+            input = patterns.replace.rs.matcher(input).replaceFirst(rsTag[getRandom(0, rsTag.length - 1)]);
         }
 
         // rp
@@ -154,7 +147,7 @@ public class HyExpression
             }
 
             String text = "ERROR";
-            double random = MathUtils.getRandom(0, max);
+            double random = getRandom(0, max);
             for (Map.Entry<Double, String> textEntry : texts.entrySet())
             {
                 text = textEntry.getValue();
