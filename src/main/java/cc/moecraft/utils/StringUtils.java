@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * Github: https://github.com/hykilpikonna
  * Meow!
  */
+@SuppressWarnings("WeakerAccess")
 public class StringUtils
 {
     /**
@@ -227,6 +228,7 @@ public class StringUtils
 
     /**
      * 把BufferedReader读到字符串
+     *
      * @param reader BufferedReader
      * @return 字符串
      */
@@ -237,6 +239,7 @@ public class StringUtils
 
     /**
      * 带变量输出一个字符串
+     *
      * @param printer 日志输出类 (可以是匿名类)
      * @param text 字符串
      * @param variables 变量和替换
@@ -270,6 +273,7 @@ public class StringUtils
 
     /**
      * Make all spaces single space.
+     * 把所有空格缩短到一个空格.
      *
      * @param original Original String
      * @return Modified string.
