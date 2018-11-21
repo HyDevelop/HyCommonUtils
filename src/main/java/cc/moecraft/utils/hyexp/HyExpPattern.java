@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author Hykilpikonna
  */
 @Getter
-enum HyExpPatterns
+enum HyExpPattern
 {
     RI("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})", "(?ms)%ri\\{[-0-9,.]*?}"),
     RD("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})", "(?ms)%rd\\{[-0-9,.]*?}"),
@@ -27,7 +27,7 @@ enum HyExpPatterns
     final Pattern find;
     final Pattern replace;
 
-    HyExpPatterns(String find, String replace)
+    HyExpPattern(String find, String replace)
     {
         this.find = Pattern.compile(find);
         this.replace = Pattern.compile(replace);
