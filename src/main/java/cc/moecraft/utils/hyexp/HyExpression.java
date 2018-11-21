@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
 import static cc.moecraft.utils.MathUtils.getRandom;
@@ -116,34 +117,29 @@ public class HyExpression
         // %rs{} (Random string)
         process(patterns.find.rs, input, tags -> tags[getRandom(0, tags.length - 1)]);
 
-        // rp
-        matcher = patterns.find.rp.matcher(input);
-        while (matcher.find())
+        // %rp{} (Random strings with defined possibility)
+        process(patterns.find.rp, input, tags ->
         {
-            String[] rpTag = matcher.group().split(",");
             Map<Double, String> texts = new LinkedHashMap<>();
 
             double max = 0;
-            for (int i = 0; i < rpTag.length; i += 2)
+            for (int i = 0; i < tags.length; i += 2)
             {
-                double chance = Double.valueOf(rpTag[i + 1]);
+                double chance = Double.valueOf(tags[i + 1]);
                 if (chance <= 0) continue;
 
                 max += chance;
-                texts.put(max, rpTag[i]);
+                texts.put(max, tags[i]);
             }
 
-            String text = "ERROR";
             double random = getRandom(0, max);
-            for (Map.Entry<Double, String> textEntry : texts.entrySet())
-            {
-                text = textEntry.getValue();
-                if (textEntry.getKey() > random) break;
-            }
+            for (Entry<Double, String> entry : texts.entrySet())
+                if (entry.getKey() > random) return entry.getValue();
 
-            input = patterns.replace.rp.matcher(input).replaceFirst(text);
-        }
+            return "ERROR";
+        });
 
+        // Process complex things.
         return safeMode ? resolveComplexSafe(input) : resolveComplexJS(input);
     }
 }
