@@ -1,24 +1,17 @@
 package cc.moecraft.utils.hyexp;
 
-import cc.moecraft.utils.ArrayUtils;
 import cc.moecraft.utils.MathUtils;
 import cc.moecraft.utils.StringUtils;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.mariuszgromada.math.mxparser.Argument;
-import org.mariuszgromada.math.mxparser.Expression;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexJS;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
+import static cc.moecraft.utils.hyexp.HyExpPatterns.patterns;
 
 /**
  * 此类由 Hykilpikonna 在 2018/08/24 创建!
@@ -65,37 +58,6 @@ import static cc.moecraft.utils.hyexp.HyExpComplexUtils.resolveComplexSafe;
 @NoArgsConstructor @AllArgsConstructor
 public class HyExpression
 {
-    private static final class patterns
-    {
-        private static final class find
-        {
-            private static final Pattern ri = Pattern.compile("(?ms)(?<=%ri\\{)[-0-9,.]*?(?=})");
-            private static final Pattern rd = Pattern.compile("(?ms)(?<=%rd\\{)[-0-9,.]*?(?=})");
-            private static final Pattern rs = Pattern.compile("(?ms)(?<=%rs\\{).*?(?=})");
-            private static final Pattern rp = Pattern.compile("(?ms)(?<=%rp\\{).*?(?=})");
-
-            private static final Pattern ac = Pattern.compile("(?ms)(?<=%ac\\{).*?(?=})");
-            private static final Pattern cp = Pattern.compile("(?ms)(?<=%cp\\{).*?(?=})");
-            private static final Pattern ca = Pattern.compile("(?ms)(?<=%ca\\{).*?(?=})");
-
-            private static final Pattern pref = Pattern.compile("(?ms)(?<=%pref\\{).*?(?=})");
-        }
-
-        private static final class replace
-        {
-            private static final Pattern ri = Pattern.compile("(?ms)%ri\\{[-0-9,.]*?}");
-            private static final Pattern rd = Pattern.compile("(?ms)%rd\\{[-0-9,.]*?}");
-            private static final Pattern rs = Pattern.compile("(?ms)%rs\\{.*?}");
-            private static final Pattern rp = Pattern.compile("(?ms)%rp\\{.*?}");
-
-            private static final Pattern ac = Pattern.compile("(?ms)%ac\\{.*?}");
-            private static final Pattern cp = Pattern.compile("(?ms)%cp\\{.*?}");
-            private static final Pattern ca = Pattern.compile("(?ms)%ca\\{.*?}");
-
-            private static final Pattern pref = Pattern.compile("(?ms)%pref\\{.*?}");
-        }
-    }
-
     /**
      * 解析一条HyExp
      *
@@ -208,10 +170,6 @@ public class HyExpression
             raw = patterns.replace.rp.matcher(raw).replaceFirst(text);
         }
 
-        return safeMode ?
-                resolveComplexSafe(raw, new HashMap<>()) :
-                resolveComplexJS(raw, new ScriptEngineManager().getEngineByName("js"));
+        return safeMode ? resolveComplexSafe(raw) : resolveComplexJS(raw);
     }
-
-
 }
