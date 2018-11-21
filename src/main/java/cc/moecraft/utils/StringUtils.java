@@ -305,4 +305,23 @@ public class StringUtils
                 .replace("\\\"", "\"")
                 .replace("\\\\", "\\");
     }
+
+    /**
+     * Undo escaping.
+     * 把转义过的字符串转义回去.
+     *
+     * @param escaped Escaped text.
+     * @return None-escaped text.
+     */
+    public static String unescape(String escaped)
+    {
+        return escaped
+                .replace("\b", "\\b")
+                .replace("\n", "\\n")
+                .replace("\t", "\\t")
+                .replace("\r", "\\r")
+                .replace("\f", "\\f")
+                .replace("\"", "\\\"")
+                .replace("\\", "\\\\");
+    }
 }
