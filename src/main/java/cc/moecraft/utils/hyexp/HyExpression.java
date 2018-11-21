@@ -61,14 +61,14 @@ public class HyExpression
     /**
      * 解析一条HyExp
      *
-     * @param raw 表达式字符串
+     * @param input 表达式字符串
      * @param safeMode 是否安全模式, 如果是本地用推荐false, 如果是公开推荐true.
      * @return 解析后的结果
      */
-    public static String resolve(String raw, boolean safeMode)
+    public static String resolve(String input, boolean safeMode)
     {
         // Detects if it is empty.
-        if (raw == null || raw.isEmpty()) return "";
+        if (input == null || input.isEmpty()) return "";
 
         Matcher matcher;
 
@@ -76,10 +76,10 @@ public class HyExpression
         boolean resolveCommands = false;
 
         // %pref{} (Preferences)
-        matcher = patterns.find.pref.matcher(raw);
+        matcher = patterns.find.pref.matcher(input);
         while (matcher.find())
         {
-            String[] tags = matcher.group().toLowerCase().replace(" ", "").replace("\n", "").split(",");
+            String[] tags = matcher.group().split(",");
 
             for (String tag : tags)
             {
@@ -87,18 +87,18 @@ public class HyExpression
                 {
                     case "ps": preserveSpace = true; continue;
                     case "rc": resolveCommands = true; continue;
-                    case "no": return patterns.replace.pref.matcher(raw).replaceAll("");
+                    case "no": return patterns.replace.pref.matcher(input).replaceAll("");
                     default: return "Error: PREF标签" + tag + "未识别";
                 }
             }
         }
 
         // Actually implementing the settings.
-        if (!preserveSpace) raw = StringUtils.trimSpaces(raw);
-        if (resolveCommands) raw = StringUtils.escape(raw);
+        if (!preserveSpace) input = StringUtils.trimSpaces(input);
+        if (resolveCommands) input = StringUtils.escape(input);
 
         // %ac{} (Append chars)
-        matcher = patterns.find.ac.matcher(raw);
+        matcher = patterns.find.ac.matcher(input);
         while (matcher.find())
         {
             String[] tags = matcher.group().split(",");
@@ -106,11 +106,11 @@ public class HyExpression
             String text = tags[0];
             int times = Integer.parseInt(tags[1]);
 
-            raw = patterns.replace.ac.matcher(raw).replaceFirst()
+            input = patterns.replace.ac.matcher(input).replaceFirst()
         }
 
         // ri
-        matcher = patterns.find.ri.matcher(raw);
+        matcher = patterns.find.ri.matcher(input);
         while (matcher.find())
         {
             String[] riTag = matcher.group().split(",");
@@ -118,11 +118,11 @@ public class HyExpression
             int num0 = Math.round(Float.parseFloat(riTag[0]));
             int num1 = Math.round(Float.parseFloat(riTag[1]));
 
-            raw = patterns.replace.ri.matcher(raw).replaceFirst(String.valueOf(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1))));
+            input = patterns.replace.ri.matcher(input).replaceFirst(String.valueOf(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1))));
         }
 
         // rd
-        matcher = patterns.find.rd.matcher(raw);
+        matcher = patterns.find.rd.matcher(input);
         while (matcher.find())
         {
             String[] rdTag = matcher.group().split(",");
@@ -131,19 +131,19 @@ public class HyExpression
             double num1 = Double.parseDouble(rdTag[1]);
             int round = rdTag.length == 3 ? Integer.parseInt(rdTag[2]) : 2;
 
-            raw = patterns.replace.rd.matcher(raw).replaceFirst(String.valueOf(MathUtils.round(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1)), round)));
+            input = patterns.replace.rd.matcher(input).replaceFirst(String.valueOf(MathUtils.round(MathUtils.getRandom(Math.min(num0, num1), Math.max(num0, num1)), round)));
         }
 
         // rs
-        matcher = patterns.find.rs.matcher(raw);
+        matcher = patterns.find.rs.matcher(input);
         while (matcher.find())
         {
             String[] rsTag = matcher.group().split(",");
-            raw = patterns.replace.rs.matcher(raw).replaceFirst(rsTag[MathUtils.getRandom(0, rsTag.length - 1)]);
+            input = patterns.replace.rs.matcher(input).replaceFirst(rsTag[MathUtils.getRandom(0, rsTag.length - 1)]);
         }
 
         // rp
-        matcher = patterns.find.rp.matcher(raw);
+        matcher = patterns.find.rp.matcher(input);
         while (matcher.find())
         {
             String[] rpTag = matcher.group().split(",");
@@ -167,9 +167,9 @@ public class HyExpression
                 if (textEntry.getKey() > random) break;
             }
 
-            raw = patterns.replace.rp.matcher(raw).replaceFirst(text);
+            input = patterns.replace.rp.matcher(input).replaceFirst(text);
         }
 
-        return safeMode ? resolveComplexSafe(raw) : resolveComplexJS(raw);
+        return safeMode ? resolveComplexSafe(input) : resolveComplexJS(input);
     }
 }
