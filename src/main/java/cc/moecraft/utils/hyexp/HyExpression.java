@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import static cc.moecraft.utils.MathUtils.*;
 import static cc.moecraft.utils.StringUtils.*;
 import static cc.moecraft.utils.hyexp.HyExpComplexUtils.*;
+import static cc.moecraft.utils.hyexp.HyExpPattern.*;
 import static cc.moecraft.utils.hyexp.HyExpUtils.*;
 
 import static java.lang.Double.parseDouble;
@@ -76,7 +77,7 @@ public class HyExpression
         boolean resolveCommands = false;
 
         // %pref{} (Preferences)
-        matcher = patterns.find.pref.matcher(input);
+        matcher = PREF.find.matcher(input);
         while (matcher.find())
         {
             String[] tags = matcher.group().split(",");
@@ -98,20 +99,20 @@ public class HyExpression
         if (resolveCommands) input = escape(input);
 
         // %ac{} (Append chars)
-        input = process(patterns.find.ac, input, tags -> repeat(tags[0], parseInt(tags[1])));
+        input = process(AC, input, tags -> repeat(tags[0], parseInt(tags[1])));
 
         // %ri{} (Random int)
-        input = process(patterns.find.ri, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
+        input = process(RI, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
 
         // %rd{} (Random double)
-        input = process(patterns.find.rd, input, tags -> round(getRandom(parseDouble(tags[0]), parseDouble(tags[1])),
+        input = process(RD, input, tags -> round(getRandom(parseDouble(tags[0]), parseDouble(tags[1])),
                 tags.length == 3 ? parseInt(tags[2]) : 2));
 
         // %rs{} (Random string)
-        input = process(patterns.find.rs, input, tags -> tags[getRandom(0, tags.length - 1)]);
+        input = process(RS, input, tags -> tags[getRandom(0, tags.length - 1)]);
 
         // %rp{} (Random strings with defined possibility)
-        input = process(patterns.find.rp, input, tags ->
+        input = process(RP, input, tags ->
         {
             Map<Double, String> texts = new LinkedHashMap<>();
 
