@@ -31,7 +31,7 @@ import static java.lang.Integer.parseInt;
  * - 随机字符串:          %rs{可能的字符串1,可能的字符串2...}
  * - 指定几率随机字符串:  %rp{可能的字符串1,几率1,可能的字符串2,几率2...}
  * - 重复字符串:          %ac{字符串,数量}
- * - 重复字符串:          %aa{字符串,数量,分隔字符串}
+ * - 重复字符串:          %as{字符串,数量,分隔字符串}
  * - 处理复杂前转义字符:  %cp{字符}
  * - 处理复杂后转义字符:  %ca{字符}
  *
@@ -102,6 +102,9 @@ public class HyExpression
 
         // %ac{} (Append chars)
         input = process(AC, input, tags -> repeat(tags[0], parseInt(tags[1])));
+
+        // %as{} (Append chars with Separator)
+        input = process(AS, input, tags -> repeat(tags[0], parseInt(tags[1]), tags[2]));
 
         // %ri{} (Random int)
         input = process(RI, input, tags -> getRandom(parseInt(tags[0]), parseInt(tags[1])));
