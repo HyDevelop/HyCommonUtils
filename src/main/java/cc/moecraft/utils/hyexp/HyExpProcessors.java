@@ -22,7 +22,7 @@ class HyExpProcessors
 
     interface HyExpRawProcessor
     {
-        Object process(String tags);
+        Object process(String raw);
     }
 
     interface HyExpDoer
