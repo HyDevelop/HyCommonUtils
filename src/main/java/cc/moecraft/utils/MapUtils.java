@@ -44,6 +44,7 @@ public class MapUtils
             result.put(max, kv[i]);
         }
 
+        result.put(-1d, max);
         return result;
     }
 
