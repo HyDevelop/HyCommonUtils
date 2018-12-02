@@ -115,12 +115,11 @@ public class StringCodecUtils
      */
     public static String fromAscii(String ascii)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        String[] chars = ascii.split(" ");
-        for (String aChar : chars)
-        {
-            stringBuilder.append((char) Integer.parseInt(aChar));
-        }
-        return stringBuilder.toString();
+        StringBuilder result = new StringBuilder();
+
+        for (String one : ascii.split(" "))
+            result.append((char) Integer.parseInt(one));
+
+        return result.toString();
     }
 }
