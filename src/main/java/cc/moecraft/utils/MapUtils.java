@@ -46,4 +46,22 @@ public class MapUtils
 
         return result;
     }
+
+    /**
+     * Get a random value in a distributed map.
+     *
+     * @param distributedMap Distributed chance map.
+     * @return Random value.
+     */
+    public static Object getRandom(LinkedHashMap<Double, Object> distributedMap)
+    {
+        // Get a random number from 0 to max.
+        double random = MathUtils.getRandom(0, Double.parseDouble(distributedMap.get(-1d).toString()));
+
+        // Get the text of that random number.
+        for (Map.Entry<Double, Object> entry : distributedMap.entrySet())
+            if (entry.getKey() > random) return entry.getValue();
+
+        return null;
+    }
 }
