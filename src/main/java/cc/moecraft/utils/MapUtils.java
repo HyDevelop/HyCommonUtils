@@ -64,4 +64,15 @@ public class MapUtils
 
         return null;
     }
+
+    /**
+     * Get a random value in Value Chance pairs.
+     *
+     * @param kv Value Chance Pairs
+     * @return Random value.
+     */
+    public static Object getRandom(Object... kv)
+    {
+        return getRandom(distributeChance(kv));
+    }
 }
