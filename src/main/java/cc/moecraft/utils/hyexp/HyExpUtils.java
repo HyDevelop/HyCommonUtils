@@ -45,6 +45,22 @@ class HyExpUtils
     }
 
     /**
+     * Process a raw tag.
+     *
+     * @param pattern Pattern
+     * @param original Original String.
+     * @param processor Processor for processing the tag.
+     * @return Result.
+     */
+    static String processRaw(HyExpPattern pattern, String original, HyExpRawProcessor processor)
+    {
+        Matcher matcher = pattern.find.matcher(original);
+        while (matcher.find()) original = pattern.replace.matcher(original).replaceFirst(
+                processor.process(matcher.group()).toString());
+        return original;
+    }
+
+    /**
      * Process a tag.
      *
      * @param pattern Pattern
