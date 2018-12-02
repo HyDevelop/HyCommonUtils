@@ -12,48 +12,57 @@ import cn.hutool.core.codec.Base32;
  */
 public class StringCodecUtils
 {
-    private static final char[] HEX_CHARS = "0123456789ABCDEF".toCharArray();
+    private static final String HEX_STRING = "0123456789ABCDEF";
+    private static final char[] HEX_CHARS = HEX_STRING.toCharArray();
 
     /**
      * 字符串转换成十六进制字符串
-     * @param original 源字符串
-     * @return HEX字符串
+     * Convert a string to a hex string.
+     *
+     * @param original 源字符串 / Original String
+     * @param spacing 是否有空格 / Is there space in between.
+     * @return HEX字符串 / Hex String.
+     */
+    public static String toHex(String original, boolean spacing)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (byte b : original.getBytes())
+        {
+            result.append(HEX_CHARS[(b & 0x0f0) >> 4]).append(HEX_CHARS[b & 0x0f]);
+            if (spacing) result.append(' ');
+        }
+
+        return result.toString().trim();
+    }
+
+    /**
+     *
+     *
+     * @param original
+     * @return
      */
     public static String toHex(String original)
     {
-        StringBuilder sb = new StringBuilder("");
-        byte[] bs = original.getBytes();
-        int bit;
-
-        for (int i = 0; i < bs.length; i++)
-        {
-            bit = (bs[i] & 0x0f0) >> 4;
-            sb.append(HEX_CHARS[bit]);
-            bit = bs[i] & 0x0f;
-            sb.append(HEX_CHARS[bit]);
-            sb.append(' ');
-        }
-        return sb.toString().trim();
+        return toHex(original, false);
     }
 
     /**
      * 十六进制转换字符串
+     *
      * @param hexStr HEX字符串
      * @return 还原字符串
      */
     public static String fromHex(String hexStr)
     {
-        hexStr = hexStr.replace(" ", "");
+        hexStr = hexStr.replace(" ", "").replace("\n", "");
 
-        String str = "0123456789ABCDEF";
-        char[] hexs = hexStr.toCharArray();
         byte[] bytes = new byte[hexStr.length() / 2];
-        int n;
 
         for (int i = 0; i < bytes.length; i++)
         {
-            n = str.indexOf(hexs[2 * i]) * 16;
-            n += str.indexOf(hexs[2 * i + 1]);
+            int n = HEX_STRING.indexOf(HEX_CHARS[2 * i]) * 16;
+            n += HEX_STRING.indexOf(HEX_CHARS[2 * i + 1]);
             bytes[i] = (byte) (n & 0xff);
         }
         return new String(bytes);
