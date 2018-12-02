@@ -15,12 +15,14 @@ public class MapBuilder
 {
     /**
      * 把KV对构建成Map
-     * @param classOne 第一个类的类型
-     * @param classTwo 第二个类的类型
-     * @param <T1> 第一个类的类型
-     * @param <T2> 第二个类的类型
-     * @param kv KV对
-     * @return 构建好的Map
+     * Build a Map with key value pairs.
+     *
+     * @param classOne 第一个类的类型 / Type of Key
+     * @param classTwo 第二个类的类型 / Type of Value
+     * @param <T1> 第一个类的类型 / Type of Key
+     * @param <T2> 第二个类的类型 / Type of Value
+     * @param kv KV对             / Key value pairs.
+     * @return 构建好的Map        / A HashMap with the values.
      */
     public static <T1, T2> HashMap<T1, T2> build(Class<T1> classOne, Class<T2> classTwo, Object... kv)
     {
