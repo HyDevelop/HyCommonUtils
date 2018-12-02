@@ -12,16 +12,16 @@ public class HyExpressionTest
 {
     public static void main(String[] args)
     {
-        HyExpressionResolver resolver = new HyExpressionResolver(false);
-
-        System.out.println("---------- 没有SafeMode ----------");
-        test(resolver);
-
-        resolver.setSafeMode(true);
-        System.out.println();
+        HyExpressionResolver resolver = new HyExpressionResolver(true);
 
         System.out.println("---------- 有SafeMode ----------");
         test(resolver);
+
+        /*resolver.setSafeMode(false);
+        System.out.println();
+
+        System.out.println("---------- 没有SafeMode ----------");
+        test(resolver);*/
     }
 
     private static void test(HyExpressionResolver resolver)
@@ -37,7 +37,8 @@ public class HyExpressionTest
         System.out.println(resolver.resolve("%rp{A卡,100,N卡,0}"));
 
         System.out.println(resolver.resolve("%rs{A的第一行\nA的第二行,B的第一行\nB的第二行}"));
+        System.out.println(resolver.resolve("%as{重要的事情要重复三遍,3,%comma% }"));
 
-        System.out.println(resolver.resolve("%pref{rc,ps}%rs{A\\tA,%cp{,}B\\tB}"));
+        System.out.println(resolver.resolve("%pref{rc,ps}%rs{A\\tA,B\\tB}"));
     }
 }
