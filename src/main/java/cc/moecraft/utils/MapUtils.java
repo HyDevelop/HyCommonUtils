@@ -62,7 +62,7 @@ public class MapUtils
         for (Map.Entry<Double, Object> entry : distributedMap.entrySet())
             if (entry.getKey() > random) return entry.getValue();
 
-        return null;
+        return "ERROR";
     }
 
     /**
