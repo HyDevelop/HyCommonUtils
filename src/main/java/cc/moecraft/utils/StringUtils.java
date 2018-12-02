@@ -340,4 +340,23 @@ public class StringUtils
         for (int i = 0; i < times; i++) result.append(text);
         return result.toString();
     }
+
+    /**
+     * Repeat a string how many times.
+     * 把一个字符串重复多少遍.
+     *
+     * @param text The string
+     * @param times How many times.
+     * @param separator Separator.
+     * @return Repeated string.
+     */
+    public static String repeat(String text, int times, String separator)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < times - 1; i++)
+            result.append(text).append(separator);
+
+        return result.append(text).toString();
+    }
 }
