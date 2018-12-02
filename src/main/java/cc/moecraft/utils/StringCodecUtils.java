@@ -10,18 +10,18 @@ import cn.hutool.core.codec.Base32;
  *
  * @author Hykilpikonna
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class StringCodecUtils
 {
     private static final String HEX_STRING = "0123456789ABCDEF";
     private static final char[] HEX_CHARS = HEX_STRING.toCharArray();
 
     /**
-     * 字符串转换成十六进制字符串
      * Convert a string to a hex string.
      *
-     * @param original 源字符串 / Original String
-     * @param spacing 是否有空格 / Is there space in between.
-     * @return HEX字符串 / Hex String.
+     * @param original Original String
+     * @param spacing Is there space in between.
+     * @return Hex String.
      */
     public static String toHex(String original, boolean spacing)
     {
@@ -37,32 +37,33 @@ public class StringCodecUtils
     }
 
     /**
+     * Convert a string to a hex string.
      *
-     *
-     * @param original
-     * @return
+     * @param original Original String
+     * @return Hex String.
      */
     public static String toHex(String original)
     {
-        return toHex(original, false);
+        return toHex(original, true);
     }
 
     /**
-     * 十六进制转换字符串
+     * Decode a hex string to it's original string.
      *
-     * @param hexStr HEX字符串
-     * @return 还原字符串
+     * @param hexStr Hex string
+     * @return Original string.
      */
     public static String fromHex(String hexStr)
     {
         hexStr = hexStr.replace(" ", "").replace("\n", "");
 
+        char[] chars = hexStr.toCharArray();
         byte[] bytes = new byte[hexStr.length() / 2];
 
         for (int i = 0; i < bytes.length; i++)
         {
-            int n = HEX_STRING.indexOf(HEX_CHARS[2 * i]) * 16;
-            n += HEX_STRING.indexOf(HEX_CHARS[2 * i + 1]);
+            int start = 2 * i;
+            int n = HEX_STRING.indexOf(chars[start]) * 16 + HEX_STRING.indexOf(chars[start + 1]);
             bytes[i] = (byte) (n & 0xff);
         }
         return new String(bytes);
