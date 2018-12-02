@@ -32,7 +32,7 @@ import static java.lang.Integer.parseInt;
  * - 指定几率随机字符串:  %rp{可能的字符串1,几率1,可能的字符串2,几率2...}
  * - 重复字符串:          %ac{字符串,数量}
  * - 重复字符串:          %as{字符串,数量,分隔字符串}
- * - 处理复杂前转义字符:  %cp{字符}
+ * - 处理复杂前转义字符:  %cb{字符}
  * - 处理复杂后转义字符:  %ca{字符}
  *
  * 复杂格式:
@@ -119,7 +119,16 @@ public class HyExpression
         // %rp{} (Random strings with defined possibility)
         input = process(RP, input, MapUtils::getRandom);
 
+        // %cb{} (Insert raw Char Before processing complex)
+        input = processRaw(CB, input, raw -> raw);
+
         // Process complex things.
-        return safeMode ? resolveComplexSafe(input) : resolveComplexJS(input);
+        input =  safeMode ? resolveComplexSafe(input) : resolveComplexJS(input);
+
+        // %ca{} (Insert raw Char After processing complex)
+        input = processRaw(CA, input, raw -> raw);
+
+        // Return result
+        return input;
     }
 }
