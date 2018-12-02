@@ -38,4 +38,31 @@ public class MapBuilder
 
         return result;
     }
+
+    /**
+     * 预设构建
+     * Presets
+     */
+    public static class presets
+    {
+        public static HashMap<String, String> buildStringString(Object... kv)
+        {
+            return build(String.class, String.class, kv);
+        }
+
+        public static HashMap<String, Object> buildStringObject(Object... kv)
+        {
+            return build(String.class, Object.class, kv);
+        }
+
+        public static HashMap<String, Long> buildStringLong(Object... kv)
+        {
+            return build(String.class, Long.class, kv);
+        }
+
+        public static HashMap<String, Double> buildStringDouble(Object... kv)
+        {
+            return build(String.class, Double.class, kv);
+        }
+    }
 }
