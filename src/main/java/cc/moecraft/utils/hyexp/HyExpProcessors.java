@@ -20,6 +20,11 @@ class HyExpProcessors
         Object process(String[] tags);
     }
 
+    interface HyExpRawProcessor
+    {
+        Object process(String tags);
+    }
+
     interface HyExpDoer
     {
         void process(String[] tags);
