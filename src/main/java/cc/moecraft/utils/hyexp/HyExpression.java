@@ -54,9 +54,12 @@ import static java.lang.Integer.parseInt;
  * - "您的暑假余额不足, 还剩%ri{-100,-1}天, 请充值"
  * - "抽到了: %rp{SSR卡,3,SR卡,17,R卡,40,N卡,40}"
  *
- * 复杂例子
+ * 复杂例子:
  * - "%var{a,100}%var{b,50}%cal{(a+b)*b}"  // 会返回7500
  * - "%var{a,%ri{1,100}}%var{b,%rd{0,1}},%cal{(a+b)*(a+b)*%rd{1,2,4}}"
+ *
+ * 变量替换:
+ * - "%comma%" = ","
  *
  * @author Hykilpikonna
  */
@@ -129,6 +132,6 @@ public class HyExpression
         input = processRaw(CA, input, raw -> raw);
 
         // Return result
-        return input;
+        return input.replace("%comma%", ",");
     }
 }
