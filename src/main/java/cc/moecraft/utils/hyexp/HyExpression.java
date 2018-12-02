@@ -115,6 +115,8 @@ public class HyExpression
         {
             Map<Double, String> texts = new LinkedHashMap<>();
 
+            // Sort them one after another.
+            // e.g. 50, 25, 25 becomes 50, 75, 100
             double max = 0;
             for (int i = 0; i < tags.length; i += 2)
             {
@@ -125,7 +127,10 @@ public class HyExpression
                 texts.put(max, tags[i]);
             }
 
+            // Get a random number from 0 to max.
             double random = getRandom(0, max);
+
+            // Get the text of that random number.
             for (Entry<Double, String> entry : texts.entrySet())
                 if (entry.getKey() > random) return entry.getValue();
 
