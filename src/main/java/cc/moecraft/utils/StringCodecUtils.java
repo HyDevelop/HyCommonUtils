@@ -92,26 +92,26 @@ public class StringCodecUtils
     }
 
     /**
-     * 字符串转换成ASCII串
-     * @param original 源字符串
-     * @return ASCII串
+     * Convert string to Ascii string.
+     *
+     * @param original Original String
+     * @return Ascii String
      */
     public static String toAscii(String original)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        char[] chars = original.toCharArray();
-        for (int i = 0; i < chars.length - 1; i++)
-        {
-            stringBuilder.append((int) chars[i]).append(" ");
-        }
-        stringBuilder.append((int) chars[chars.length - 1]);
-        return stringBuilder.toString();
+        StringBuilder result = new StringBuilder();
+
+        for (char one : original.toCharArray())
+            result.append((int) one).append(" ");
+
+        return result.toString().trim();
     }
 
     /**
-     * ASCII串转字符串
-     * @param ascii ASCII串 (空格分割)
-     * @return 还原字符串
+     * Decode ascii string to original string.
+     *
+     * @param ascii Ascii String (Separated by space character " ")
+     * @return Original String.
      */
     public static String fromAscii(String ascii)
     {
