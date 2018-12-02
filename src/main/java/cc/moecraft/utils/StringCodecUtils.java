@@ -70,28 +70,6 @@ public class StringCodecUtils
     }
 
     /**
-     * 字符串转换成Base32
-     *
-     * @param original 源字符串
-     * @return Base32字符串
-     */
-    public static String toBase32(String original)
-    {
-        return Base32.encode(original);
-    }
-
-    /**
-     * Base32转换回字符串
-     *
-     * @param base32 Base32字符串
-     * @return 还原字符串
-     */
-    public static String fromBase32(String base32)
-    {
-        return Base32.decodeStr(base32);
-    }
-
-    /**
      * Convert string to Ascii string.
      *
      * @param original Original String
@@ -121,5 +99,15 @@ public class StringCodecUtils
             result.append((char) Integer.parseInt(one));
 
         return result.toString();
+    }
+
+    public static String toBase32(String original)
+    {
+        return Base32.encode(original);
+    }
+
+    public static String fromBase32(String base32)
+    {
+        return Base32.decodeStr(base32);
     }
 }
