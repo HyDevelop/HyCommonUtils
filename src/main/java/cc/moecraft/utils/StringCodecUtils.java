@@ -1,6 +1,6 @@
 package cc.moecraft.utils;
 
-import org.apache.commons.codec.binary.Base32;
+import cn.hutool.core.codec.Base32;
 
 /**
  * 此类由 Hykilpikonna 在 2018/06/13 创建!
@@ -61,22 +61,24 @@ public class StringCodecUtils
 
     /**
      * 字符串转换成Base32
+     *
      * @param original 源字符串
      * @return Base32字符串
      */
     public static String toBase32(String original)
     {
-        return new Base32().encodeAsString(original.getBytes());
+        return Base32.encode(original);
     }
 
     /**
      * Base32转换回字符串
+     *
      * @param base32 Base32字符串
      * @return 还原字符串
      */
     public static String fromBase32(String base32)
     {
-        return new String(new Base32().decode(base32));
+        return Base32.decodeStr(base32);
     }
 
     /**
