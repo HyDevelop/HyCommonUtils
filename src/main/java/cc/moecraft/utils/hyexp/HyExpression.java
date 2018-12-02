@@ -42,8 +42,8 @@ import static java.lang.Integer.parseInt;
  * - 这些设置默认全都是False, 如果有标签就是True了.
  *
  * 设置标签:
- * - %pref{rc}: 是否解析指令字符 (比如把\\n解析成NewLine).
  * - %pref{ps}: 是否保留多个空格.
+ * - %pref{rc}: 是否解析指令字符 (比如把\\n解析成NewLine).
  * - %pref{no}: 不处理这一句 (会把这个pref删掉).
  *
  * 基础例子:
@@ -71,38 +71,37 @@ public class HyExpression
         // Detects if it is empty.
         if (input == null || input.isEmpty()) return "";
 
-        Matcher matcher;
-
-        boolean preserveSpace = false;
-        boolean resolveCommands = false;
+        // 0: PS (Preserve Spaces)
+        // 1: RC (Resolve Commands)
+        // 2: NO (Don't Parse)
+        final boolean[] preferences = new boolean[3];
 
         // %pref{} (Preferences)
-        matcher = PREF.find.matcher(input);
-        while (matcher.find())
+        input = process(PREF, input, raw -> raw.toLowerCase().replace(" ", "").replace("\n", ""), tags ->
         {
-            String[] tags = matcher.group().split(",");
-
             for (String tag : tags)
             {
                 switch (tag)
                 {
-                    case "ps": preserveSpace = true; continue;
-                    case "rc": resolveCommands = true; continue;
-                    case "no": return patterns.replace.pref.matcher(input).replaceAll("");
+                    case "ps": preferences[0] = true; continue;
+                    case "rc": preferences[1] = true; continue;
+                    case "no": preferences[2] = true; continue;
                     default: return "Error: PREF标签" + tag + "未识别";
                 }
             }
-        }
+            return "";
+        });
 
         // Actually implementing the settings.
-        if (!preserveSpace) input = trimSpaces(input);
-        if (resolveCommands) input = escape(input);
+        if (!preferences[0]) input = trimSpaces(input);
+        if (preferences[1]) input = escape(input);
+        if (preferences[2]) return input;
 
         // %ac{} (Append chars)
         input = process(AC, input, tags -> repeat(tags[0], parseInt(tags[1])));
 
         // %ri{} (Random int)
-        input = process(RI, input, tags -> getRandom(parseFloat(tags[0]), parseFloat(tags[1])));
+        input = process(RI, input, tags -> getRandom(parseInt(tags[0]), parseInt(tags[1])));
 
         // %rd{} (Random double)
         input = process(RD, input, tags -> round(getRandom(parseDouble(tags[0]), parseDouble(tags[1])),
