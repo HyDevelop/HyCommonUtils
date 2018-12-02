@@ -1,5 +1,7 @@
 package cc.moecraft.utils.hyexp;
 
+import cc.moecraft.utils.MapUtils;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -111,31 +113,7 @@ public class HyExpression
         input = process(RS, input, tags -> tags[getRandom(0, tags.length - 1)]);
 
         // %rp{} (Random strings with defined possibility)
-        input = process(RP, input, tags ->
-        {
-            Map<Double, String> texts = new LinkedHashMap<>();
-
-            // Sort them one after another.
-            // e.g. 50, 25, 25 becomes 50, 75, 100
-            double max = 0;
-            for (int i = 0; i < tags.length; i += 2)
-            {
-                double chance = Double.valueOf(tags[i + 1]);
-                if (chance <= 0) continue;
-
-                max += chance;
-                texts.put(max, tags[i]);
-            }
-
-            // Get a random number from 0 to max.
-            double random = getRandom(0, max);
-
-            // Get the text of that random number.
-            for (Entry<Double, String> entry : texts.entrySet())
-                if (entry.getKey() > random) return entry.getValue();
-
-            return "ERROR";
-        });
+        input = process(RP, input, MapUtils::getRandom);
 
         // Process complex things.
         return safeMode ? resolveComplexSafe(input) : resolveComplexJS(input);
