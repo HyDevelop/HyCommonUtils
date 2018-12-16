@@ -2,8 +2,7 @@ package cc.moecraft.utils;
 
 import java.util.Random;
 
-import static java.lang.Math.*;
-import static java.lang.Math.min;
+import static java.lang.Math.pow;
 
 /**
  * 此类由 Hykilpikonna 在 2018/08/24 创建!
@@ -13,8 +12,145 @@ import static java.lang.Math.min;
  *
  * @author Hykilpikonna
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class MathUtils
 {
+    /**
+     * Get max of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Max value.
+     */
+    public static int max(int a, int ... others)
+    {
+        int max = a;
+        for (int other : others)
+        {
+            max = Math.max(max, other);
+        }
+        return max;
+    }
+    
+    /**
+     * Get min of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Min value.
+     */
+    public static int min(int a, int ... others)
+    {
+        int min = a;
+        for (int other : others)
+        {
+            min = Math.min(min, other);
+        }
+        return min;
+    }
+    
+    /**
+     * Get max of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Max value.
+     */
+    public static double max(double a, double ... others)
+    {
+        double max = a;
+        for (double other : others)
+        {
+            max = Math.max(max, other);
+        }
+        return max;
+    }
+    
+    /**
+     * Get min of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Min value.
+     */
+    public static double min(double a, double ... others)
+    {
+        double min = a;
+        for (double other : others)
+        {
+            min = Math.min(min, other);
+        }
+        return min;
+    }
+    
+    /**
+     * Get max of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Max value.
+     */
+    public static long max(long a, long ... others)
+    {
+        long max = a;
+        for (long other : others)
+        {
+            max = Math.max(max, other);
+        }
+        return max;
+    }
+    
+    /**
+     * Get min of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Min value.
+     */
+    public static long min(long a, long ... others)
+    {
+        long min = a;
+        for (long other : others)
+        {
+            min = Math.min(min, other);
+        }
+        return min;
+    }
+    
+    /**
+     * Get max of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Max value.
+     */
+    public static float max(float a, float ... others)
+    {
+        float max = a;
+        for (float other : others)
+        {
+            max = Math.max(max, other);
+        }
+        return max;
+    }
+    
+    /**
+     * Get min of numbers.
+     *
+     * @param a The first number.
+     * @param others The other numbers.
+     * @return Min value.
+     */
+    public static float min(float a, float ... others)
+    {
+        float min = a;
+        for (float other : others)
+        {
+            min = Math.min(min, other);
+        }
+        return min;
+    }
+    
     /**
      * 四舍五入
      * @param original 源
