@@ -1,6 +1,5 @@
-package cc.moecraft.utils.hyexp;
+package cc.moecraft.hyexp;
 
-import cc.moecraft.utils.hyexp.HyExpression;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

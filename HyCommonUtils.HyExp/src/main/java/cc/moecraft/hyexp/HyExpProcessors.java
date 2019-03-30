@@ -1,4 +1,4 @@
-package cc.moecraft.utils.hyexp;
+package cc.moecraft.hyexp;
 
 /**
  * 此类由 Hykilpikonna 在 2018/11/20 创建!
