@@ -8,9 +8,10 @@
     <artifactId>HyCommonUtils</artifactId>
     <packaging>pom</packaging>
     <version>1.4.0.207</version>
-    
+
     <modules>
         <module>HyCommonUtils.Core</module>
+        <module>HyCommonUtils.HyExp</module>
     </modules>
 
     <properties>
