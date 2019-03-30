@@ -11,5 +11,11 @@
 
     <artifactId>HyCommonUtils.HyExp</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.mariuszgromada.math</groupId>
+            <artifactId>MathParser.org-mXparser</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+    </dependencies>
 </project>
