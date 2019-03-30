@@ -12,6 +12,7 @@
     <modules>
         <module>HyCommonUtils.Core</module>
         <module>HyCommonUtils.HyExp</module>
+        <module>HyCommonUtils.GSON</module>
     </modules>
 
     <properties>
