@@ -1,4 +1,4 @@
-package cc.moecraft.utils.hyexp;
+package cc.moecraft.hyexp;
 
 import lombok.Getter;
 

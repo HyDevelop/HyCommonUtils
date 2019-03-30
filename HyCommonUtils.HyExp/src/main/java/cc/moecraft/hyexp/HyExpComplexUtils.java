@@ -1,4 +1,4 @@
-package cc.moecraft.utils.hyexp;
+package cc.moecraft.hyexp;
 
 import cc.moecraft.utils.ArrayUtils;
 import cc.moecraft.utils.StringUtils;

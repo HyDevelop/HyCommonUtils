@@ -1,11 +1,11 @@
-package cc.moecraft.utils.hyexp;
+package cc.moecraft.hyexp;
 
 import cc.moecraft.utils.MapUtils;
 
 import static cc.moecraft.utils.MathUtils.*;
 import static cc.moecraft.utils.StringUtils.*;
-import static cc.moecraft.utils.hyexp.HyExpPattern.*;
-import static cc.moecraft.utils.hyexp.HyExpUtils.*;
+import static cc.moecraft.hyexp.HyExpPattern.*;
+import static cc.moecraft.hyexp.HyExpUtils.*;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
@@ -92,25 +92,25 @@ public class HyExpression
         });
 
         // Actually implementing the settings.
-        if (!preferences[0]) input = trimSpaces(input);
-        if (preferences[1]) input = escape(input);
+        if (!preferences[0]) input = StringUtils.trimSpaces(input);
+        if (preferences[1]) input = StringUtils.escape(input);
         if (preferences[2]) return input;
 
         // %ac{} (Append chars)
-        input = process(AC, input, tags -> repeat(tags[0], parseInt(tags[1])));
+        input = process(AC, input, tags -> StringUtils.repeat(tags[0], parseInt(tags[1])));
 
         // %as{} (Append chars with Separator)
-        input = process(AS, input, tags -> repeat(tags[0], parseInt(tags[1]), tags[2]));
+        input = process(AS, input, tags -> StringUtils.repeat(tags[0], parseInt(tags[1]), tags[2]));
 
         // %ri{} (Random int)
-        input = process(RI, input, tags -> getRandom(parseInt(tags[0]), parseInt(tags[1])));
+        input = process(RI, input, tags -> MathUtils.getRandom(parseInt(tags[0]), parseInt(tags[1])));
 
         // %rd{} (Random double)
-        input = process(RD, input, tags -> round(getRandom(parseDouble(tags[0]), parseDouble(tags[1])),
+        input = process(RD, input, tags -> MathUtils.round(MathUtils.getRandom(parseDouble(tags[0]), parseDouble(tags[1])),
                 tags.length == 3 ? parseInt(tags[2]) : 2));
 
         // %rs{} (Random string)
-        input = process(RS, input, tags -> tags[getRandom(0, tags.length - 1)]);
+        input = process(RS, input, tags -> tags[MathUtils.getRandom(0, tags.length - 1)]);
 
         // %rp{} (Random strings with defined possibility)
         input = process(RP, input, MapUtils::getRandom);
