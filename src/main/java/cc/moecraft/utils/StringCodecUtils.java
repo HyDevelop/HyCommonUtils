@@ -1,7 +1,5 @@
 package cc.moecraft.utils;
 
-import cn.hutool.core.codec.Base32;
-
 /**
  * 此类由 Hykilpikonna 在 2018/06/13 创建!
  * Created by Hykilpikonna on 2018/06/13!
@@ -99,15 +97,5 @@ public class StringCodecUtils
             result.append((char) Integer.parseInt(one));
 
         return result.toString();
-    }
-
-    public static String toBase32(String original)
-    {
-        return Base32.encode(original);
-    }
-
-    public static String fromBase32(String base32)
-    {
-        return Base32.decodeStr(base32);
     }
 }
