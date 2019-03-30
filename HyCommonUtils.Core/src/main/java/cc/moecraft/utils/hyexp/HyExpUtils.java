@@ -2,8 +2,6 @@ package cc.moecraft.utils.hyexp;
 
 import java.util.regex.Matcher;
 
-import static cc.moecraft.utils.hyexp.HyExpProcessors.*;
-
 /**
  * 此类由 Hykilpikonna 在 2018/11/20 创建!
  * Created by Hykilpikonna on 2018/11/20!
@@ -22,7 +20,7 @@ class HyExpUtils
      * @param processor Processor for processing the tag.
      * @return Result.
      */
-    static String process(HyExpPattern pattern, String original, HyExpProcessor processor)
+    static String process(HyExpPattern pattern, String original, HyExpProcessors.HyExpProcessor processor)
     {
         return process(pattern, original, raw -> raw, processor);
     }
@@ -36,7 +34,7 @@ class HyExpUtils
      * @param processor Processor for processing the tag.
      * @return Result.
      */
-    static String process(HyExpPattern pattern, String original, HyExpPreProcessor preProcessor, HyExpProcessor processor)
+    static String process(HyExpPattern pattern, String original, HyExpProcessors.HyExpPreProcessor preProcessor, HyExpProcessors.HyExpProcessor processor)
     {
         Matcher matcher = pattern.find.matcher(original);
         while (matcher.find()) original = pattern.replace.matcher(original).replaceFirst(
@@ -52,7 +50,7 @@ class HyExpUtils
      * @param processor Processor for processing the tag.
      * @return Result.
      */
-    static String processRaw(HyExpPattern pattern, String original, HyExpRawProcessor processor)
+    static String processRaw(HyExpPattern pattern, String original, HyExpProcessors.HyExpRawProcessor processor)
     {
         Matcher matcher = pattern.find.matcher(original);
         while (matcher.find()) original = pattern.replace.matcher(original).replaceFirst(
@@ -69,7 +67,7 @@ class HyExpUtils
      * @param processor Processor for processing the tag.
      * @return Result.
      */
-    static String processDo(HyExpPattern pattern, String original, HyExpPreProcessor preProcessor, HyExpDoer processor)
+    static String processDo(HyExpPattern pattern, String original, HyExpProcessors.HyExpPreProcessor preProcessor, HyExpProcessors.HyExpDoer processor)
     {
         return process(pattern, original, preProcessor, tags ->
         {

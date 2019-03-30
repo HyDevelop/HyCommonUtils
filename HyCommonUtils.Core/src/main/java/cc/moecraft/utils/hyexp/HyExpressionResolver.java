@@ -1,4 +1,4 @@
-package cc.moecraft.utils;
+package cc.moecraft.utils.hyexp;
 
 import cc.moecraft.utils.hyexp.HyExpression;
 import lombok.AllArgsConstructor;

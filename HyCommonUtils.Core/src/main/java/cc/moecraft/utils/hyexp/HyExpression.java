@@ -2,19 +2,12 @@ package cc.moecraft.utils.hyexp;
 
 import cc.moecraft.utils.MapUtils;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-
 import static cc.moecraft.utils.MathUtils.*;
 import static cc.moecraft.utils.StringUtils.*;
-import static cc.moecraft.utils.hyexp.HyExpComplexUtils.*;
 import static cc.moecraft.utils.hyexp.HyExpPattern.*;
 import static cc.moecraft.utils.hyexp.HyExpUtils.*;
 
 import static java.lang.Double.parseDouble;
-import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -126,7 +119,7 @@ public class HyExpression
         input = processRaw(CB, input, raw -> raw);
 
         // Process complex things.
-        input =  safeMode ? resolveComplexSafe(input) : resolveComplexJS(input);
+        input =  safeMode ? HyExpComplexUtils.resolveComplexSafe(input) : HyExpComplexUtils.resolveComplexJS(input);
 
         // %ca{} (Insert raw Char After processing complex)
         input = processRaw(CA, input, raw -> raw);
