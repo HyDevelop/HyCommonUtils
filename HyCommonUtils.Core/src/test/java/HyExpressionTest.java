@@ -1,4 +1,4 @@
-import cc.moecraft.utils.HyExpressionResolver;
+import cc.moecraft.utils.hyexp.HyExpressionResolver;
 
 /**
  * 此类由 Hykilpikonna 在 2018/08/24 创建!
